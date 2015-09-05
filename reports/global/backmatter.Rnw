@@ -1,0 +1,60 @@
+% %----------------------------------------------------------------------------------------
+% %  BIBLIOGRAPHY
+% %----------------------------------------------------------------------------------------
+% \chapterimage{img/fsh}
+% \chapter*{Bibliography}
+% \addcontentsline{toc}{chapter}{\textcolor{ocre}{Bibliography}}
+% \section*{Books}
+% %\addcontentsline{toc}{section}{Books}
+% \printbibliography[heading=bibempty,type=book]
+% \section*{Articles}
+% %\addcontentsline{toc}{section}{Articles}
+% \printbibliography[heading=bibempty,type=article]
+
+%----------------------------------------------------------------------------------------
+%	INDEX
+%----------------------------------------------------------------------------------------
+
+\cleardoublepage
+\phantomsection
+\setlength{\columnsep}{0.75cm}
+\addcontentsline{toc}{chapter}{\textcolor{ocre}{Index}}
+\printindex
+
+%----------------------------------------------------------------------------------------
+
+%----------------------------------------------------------------------------------------
+%  Appendix
+%----------------------------------------------------------------------------------------
+\thispagestyle{empty}
+<<echo=FALSE>>=
+i <- ckan_res("5be7ebcd-42e3-46f4-8baa-e04a59b23041")
+@
+\write18{wget -x \Sexpr{i$url}}
+\chapterimage{\Sexpr{i$pth}}
+\chapter*{Appendix 1 - Report Structure}
+\label{sec:report-structure}
+\addcontentsline{toc}{chapter}{\textcolor{ocre}{Appendix 1 - Report Structure}}
+\input{global/legend}
+
+\thispagestyle{empty}
+<<echo=FALSE>>=
+i <-ckan_res("5be7ebcd-42e3-46f4-8baa-e04a59b23041")
+@
+\write18{wget -x \Sexpr{i$url}}
+\chapterimage{\Sexpr{i$pth}}
+\chapter*{Appendix 2 - Authors' Workflow}
+\label{sec:report-workflow}
+\addcontentsline{toc}{chapter}{\textcolor{ocre}{Appendix 2 - Authors' Workflow}}
+\input{global/workflow}
+
+\thispagestyle{empty}
+<<echo=FALSE>>=
+i <- ckan_res("5be7ebcd-42e3-46f4-8baa-e04a59b23041")
+@
+\write18{wget -x \Sexpr{i$url}}
+\chapterimage{\Sexpr{i$pth}}
+\chapter*{Appendix 3 - Authors' Manual}
+\label{sec:report-manual}
+\addcontentsline{toc}{chapter}{\textcolor{ocre}{Appendix 3 - Authors' Manual}}
+\input{global/manual}

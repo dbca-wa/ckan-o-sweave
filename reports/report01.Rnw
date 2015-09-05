@@ -1,0 +1,34 @@
+%-------------------------------------------------------------------------------
+% An example report
+%
+% Modify the (re-usaable) title page layout and structure in global/frontmatter.Rnw
+% Define the report-specific content in variables below.
+%-------------------------------------------------------------------------------
+\input{global/header}
+\begin{document}
+\SweaveOpts{concordance=TRUE, echo=FALSE}
+<<echo=FALSE>>=
+source('../scripts/ckan.R')
+mpa_name <- "The report title"
+report_slug <- "nkmp"
+mpa_period <- "2014-2015"
+mpa_year <- "2015"
+mpa_editor <- "John Doe, Jane Doette"
+mpa_editor_reverse <- "Doe J, Doette J"
+mpa_contributors <- paste0("John Johnson, Steven Stevenson")
+mpa_contributors_reverse <- paste0("Johnson J, Stevenson S")
+mpa_wammp <- "Western Australian Marine Monitoring Program"
+mpa_report_title <- "Annual Marine Protected Area Biodiversity Assets and Social Values Report"
+mpa_mmu <- "Marine Monitoring Unit, Western Australian Marine Monitoring Program (WAMMP)"
+mpa_mmu_msp <- "Marine Science Program, Science and Conservation Division, Department of Parks and Wildlife"
+mpa_mmu_address <- "17 Dick Perry Avenue, Kensington, Western Australia 6151"
+img <- ckan_res("cc76f19f-7ec7-4975-b68a-d330d641fa12")
+@
+\SweaveInput{global/frontmatter.Rnw}
+%-------------------------------------------------------------------------------
+% Chapters: create in parts/
+%-------------------------------------------------------------------------------
+\SweaveInput{parts/chapter1.Rnw}
+\SweaveInput{global/backmatter.Rnw}
+\end{document}
+% EOF --------------------------------------------------------------------------

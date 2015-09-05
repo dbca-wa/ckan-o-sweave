@@ -1,0 +1,112 @@
+% !Rnw root = ../report01.Rnw
+%----------------------------------------------------------------------------------------
+%  TITLE PAGE
+%----------------------------------------------------------------------------------------
+\begingroup
+\thispagestyle{empty}
+% Image background
+\write18{wget -x \Sexpr{img$url}} % fetch chapter image from CKAN
+\AddToShipoutPicture*{\put(0,480){
+  \transparent{0.7}
+  \includegraphics[width=0.975\paperwidth,height=0.5\paperwidth]{\Sexpr{img$pth}}}}
+  % fiddly fiddly left and right margins
+
+\begin{flushleft}
+\par\normalfont\sffamily\selectfont\color{white}
+\Sexpr{mpa_wammp}\\
+\Sexpr{mpa_report_title}
+\end{flushleft}
+
+\centering
+
+\vspace*{9cm}
+\par\normalfont\fontsize{25}{25}\sffamily\selectfont
+\HRule\\
+\Sexpr{mpa_name}\par % Book title
+\Sexpr{mpa_period}
+\HRule\\
+{\normalsize Edited by \Sexpr{mpa_editor}}\par % Editor
+{\normalsize Contributors \Sexpr{mpa_contributors}}\par % Authors
+\endgroup
+
+%----------------------------------------------------------------------------------------
+%  COPYRIGHT PAGE
+%----------------------------------------------------------------------------------------
+\newpage
+~\vfill
+\thispagestyle{empty}
+
+\noindent{\textbf{\Large Suggested citation format, entire report}\\
+\Sexpr{mpa_editor_reverse} (ed.) (\Sexpr{mpa_year}) \Sexpr{mpa_name} \Sexpr{mpa_period}:
+\Sexpr{mpa_report_title}.
+\Sexpr{mpa_wammp}, \Sexpr{mpa_mmu_msp}, Perth, Australia. xx p.
+(For Internal Use Only) }\par
+\vspace{1cm}
+
+\noindent{\textbf{\Large Suggested citation format, individual status report}\\
+\Sexpr{mpa_contributors_reverse} (\Sexpr{mpa_year}) The status and trends of
+coral reef communities \Sexpr{mpa_period}.
+In \Sexpr{mpa_name} \Sexpr{mpa_period}: \Sexpr{mpa_report_title} (ed.
+\Sexpr{mpa_editor_reverse}). \Sexpr{mpa_wammp}, \Sexpr{mpa_mmu_msp}, Perth,
+Australia. pp.xx-xx.
+(For Internal Use Only)}\par
+\vspace{1cm}
+
+\noindent\textbf{\Large Online Resources}\\
+This report bases on the template
+\href{https://bitbucket.org/dpaw/ckan-o-sweave}{CKAN--o--Sweave} by
+\href{mailto:Florian.Mayer@dpaw.wa.gov.au}{Florian Mayer}, which bases on
+the \href{http://www.latextemplates.com/template/the-legrand-orange-book}{The
+Legrand Orange Book} by \href{mailto:legrand.mathias@gmail.com}{Mathias Legrand}.
+The source of this report is under \href{https://bitbucket.org/dpaw/mpa-reporting/overview}{version control}.
+To author content, contact \href{mailto:Florian.Mayer@dpaw.wa.gov.au}{Florian Mayer}.
+The latest working versions are available in the
+\href{http://internal-data.dpaw.wa.gov.au/dataset/mpa-reports}{internal DPaW data catalog};
+the production process is documented on the
+\href{http://data-demo.dpaw.wa.gov.au/dataset/report-automation}{public DPaW data catalog}.
+\vspace{1cm}
+
+\noindent\textbf{\Large Licence and Copyright}\\
+The report template is distributed under
+\href{http://creativecommons.org/licenses/by-nc-sa/3.0/}{CC BY-NC-SA 3.0} license.
+\noindent Copyright \copyright \Sexpr{mpa_year} \Sexpr{mpa_mmu_msp}\\ % Copyright notice
+\noindent \textsc{Published by \Sexpr{mpa_mmu_msp}}\\ % Publisher
+%\noindent \textsc{book-website.com}\\ % URL
+
+\begin{remark}
+For authors and contributors to this report: Please read \nameref{sec:report-structure}
+(p.(\pageref{sec:report-structure})) for an explanation of the report's structure,
+and see \nameref{sec:report-workflow} (p.(\pageref{sec:report-workflow})) and
+\nameref{sec:report-manual} (p.(\pageref{sec:report-manual})) for an in-depth technical
+reference to the writing process.
+\end{remark}
+
+%----------------------------------------------------------------------------------------
+%	TABLE OF CONTENTS
+%----------------------------------------------------------------------------------------
+<<echo=FALSE>>=
+i <- ckan_res("5be7ebcd-42e3-46f4-8baa-e04a59b23041")
+@
+\write18{wget -x \Sexpr{i$url}}
+\chapterimage{\Sexpr{i$pth}}
+\pagestyle{empty} % No headers
+\tableofcontents % Print the table of contents itself
+%\cleardoublepage % Forces the first chapter to start on an odd page so it's on the right
+\pagestyle{fancy} % Print headers again
+
+%----------------------------------------------------------------------------------------
+%  CHAPTER 1 - Introduction
+%----------------------------------------------------------------------------------------
+\thispagestyle{empty}
+<<echo=FALSE>>=
+i <- ckan_res("5be7ebcd-42e3-46f4-8baa-e04a59b23041")
+@
+\write18{wget -x \Sexpr{i$url}}
+\chapterimage{\Sexpr{i$pth}}
+\chapter*{Introduction}
+\addcontentsline{toc}{chapter}{\textcolor{ocre}{Introduction}}
+% some introduction
+\input{global/introduction}
+\pagestyle{fancy}
+
+\raggedbottom % do not enforce equal vertical distribution of sparse content

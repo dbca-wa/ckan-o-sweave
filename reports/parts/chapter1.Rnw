@@ -1,0 +1,256 @@
+% !Rnw root = ../report01.Rnw
+%-------------------------------------------------------------------------------
+% Asset Update Elasmobranchs (Sharks, Skates and Rays)
+%
+<<echo=FALSE>>=
+chapter_slug <- "ch01"
+chapter_title <- "Chapter 01"
+author <- "Main Author"
+contributors <- "Author 1, Author 2, Author 3"
+written <- "01/09/2015"
+reviewed <- ""
+edited <- ""
+i <- ckan_res("431cb74e-79b9-4e49-a87a-bb61e8d28d87")
+@
+\ch{\Sexpr{i$url}}{\Sexpr{i$pth}}{\Sexpr{chapter_title}}{\Sexpr{report_slug}}{\Sexpr{chapter_slug}}{\Sexpr{author}}{\Sexpr{contributors}}{\Sexpr{written}}
+
+%-------------------------------------------------------------------------------
+% Summary
+% Authors to write
+%-------------------------------------------------------------------------------
+\su
+
+%-------------------------------------------------------------------------------
+% CPR Assessment
+% TODO authors to update ONLY last \assrow
+% Positive = desirable, Negative = undesirable
+% report_slug: The park acronym
+% chapter_title: The asset name
+% mpa_period: The FY of this assessment
+% Argument 4: Condition Assessment: ++ + 0 - --
+% Argument 5: Condition Confidence: + 0 -
+% Argument 6: Pressure Assessment: + 0 -
+% Argument 7: Pressure Confidence: + 0 -
+% Argument 8: Data ok / warning: + -
+\asspre
+\assrow{\Sexpr{report_slug}}{\Sexpr{chapter_title}}{2013--2014}{+}{0}{+}{0}{+}
+\assrow{\Sexpr{report_slug}}{\Sexpr{chapter_title}}{\Sexpr{mpa_period}}{+}{0}{+}{0}{+}
+\asspost
+
+
+%-------------------------------------------------------------------------------
+% Condition Indicators
+% TODO authors for each indicator (add indicator sections as required):
+%   update section slug, title, short title, ckan resource id of figure
+%   toggle comment of \sh and \mpa macros to show/hide figure with heading
+%-------------------------------------------------------------------------------
+\co
+
+%-------------------------------------------------------------------------------
+% INDICATOR Abundance
+<<echo=FALSE>>=
+section_slug <- "abundance" # Section label
+section_title <- "Abundance" # Figure title
+section_short <- "Abundance" # TOC and page header
+keyword <- "Abundance"
+# g <- ckan_res("")
+@
+\sh{\Sexpr{report_slug}}{\Sexpr{chapter_slug}}{\Sexpr{section_slug}}{\Sexpr{section_short}}{\Sexpr{section_title}}{\Sexpr{keyword}}
+% \mpa{\Sexpr{g$url}}{\Sexpr{g$ind}}{\Sexpr{g$pth}}{\Sexpr{g$cap}}{\Sexpr{g$src}}{\Sexpr{g$ori}}{\Sexpr{g$lub}}{\Sexpr{g$luo}}{\Sexpr{g$syn}}
+
+
+%-------------------------------------------------------------------------------
+% INDICATOR Biomass
+<<echo=FALSE>>=
+section_slug <- "biomass" # Section label
+section_title <- "Biomass" # Figure title
+section_short <- "Biomass" # TOC and page header
+keyword <- "Biomass"
+# g <- ckan_res("")
+@
+\sh{\Sexpr{report_slug}}{\Sexpr{chapter_slug}}{\Sexpr{section_slug}}{\Sexpr{section_short}}{\Sexpr{section_title}}{\Sexpr{keyword}}
+% \mpa{\Sexpr{g$url}}{\Sexpr{g$ind}}{\Sexpr{g$pth}}{\Sexpr{g$cap}}{\Sexpr{g$src}}{\Sexpr{g$ori}}{\Sexpr{g$lub}}{\Sexpr{g$luo}}{\Sexpr{g$syn}}
+
+
+
+%-------------------------------------------------------------------------------
+% INDICATOR Diversity
+<<echo=FALSE>>=
+section_slug <- "diversity" # Section label
+section_title <- "Diversity" # Figure title
+section_short <- "Diversity" # TOC and page header
+keyword <- "Diversity"
+# g <- ckan_res("")
+@
+\sh{\Sexpr{report_slug}}{\Sexpr{chapter_slug}}{\Sexpr{section_slug}}{\Sexpr{section_short}}{\Sexpr{section_title}}{\Sexpr{keyword}}
+% \mpa{\Sexpr{g$url}}{\Sexpr{g$ind}}{\Sexpr{g$pth}}{\Sexpr{g$cap}}{\Sexpr{g$src}}{\Sexpr{g$ori}}{\Sexpr{g$lub}}{\Sexpr{g$luo}}{\Sexpr{g$syn}}
+
+
+
+%-------------------------------------------------------------------------------
+% Pressure Indicators
+%-------------------------------------------------------------------------------
+\pr
+
+%-------------------------------------------------------------------------------
+% INDICATOR Incidents
+<<echo=FALSE>>=
+section_slug <- "incidents" # Section label
+section_title <- "Incidents" # Figure title
+section_short <- "Incidents" # TOC and page header
+keyword <- "Incidents"
+# g <- ckan_res("")
+@
+\sh{\Sexpr{report_slug}}{\Sexpr{chapter_slug}}{\Sexpr{section_slug}}{\Sexpr{section_short}}{\Sexpr{section_title}}{\Sexpr{keyword}}
+% \mpa{\Sexpr{g$url}}{\Sexpr{g$ind}}{\Sexpr{g$pth}}{\Sexpr{g$cap}}{\Sexpr{g$src}}{\Sexpr{g$ori}}{\Sexpr{g$lub}}{\Sexpr{g$luo}}{\Sexpr{g$syn}}
+
+%-------------------------------------------------------------------------------
+% INDICATOR Wildlife Encounters
+<<echo=FALSE>>=
+section_slug <- "encounters" # Section label
+section_title <- "Wildlife Encounters" # Figure title
+section_short <- "Wildlife Encounters" # TOC and page header
+keyword <- "Wildlife Encounters"
+# g <- ckan_res("")
+@
+\sh{\Sexpr{report_slug}}{\Sexpr{chapter_slug}}{\Sexpr{section_slug}}{\Sexpr{section_short}}{\Sexpr{section_title}}{\Sexpr{keyword}}
+% \mpa{\Sexpr{g$url}}{\Sexpr{g$ind}}{\Sexpr{g$pth}}{\Sexpr{g$cap}}{\Sexpr{g$src}}{\Sexpr{g$ori}}{\Sexpr{g$lub}}{\Sexpr{g$luo}}{\Sexpr{g$syn}}
+
+
+%-------------------------------------------------------------------------------
+% Response Indicators
+%-------------------------------------------------------------------------------
+\re
+
+%-------------------------------------------------------------------------------
+% INDICATOR Operational Funds
+<<echo=FALSE>>=
+section_slug <- "budget" # Section label
+section_title <- "Operational Funds" # Figure title
+section_short <- "Operational Funds" # TOC and page header
+keyword <- "Operational Funds"
+# g <- ckan_res("")
+@
+\sh{\Sexpr{report_slug}}{\Sexpr{chapter_slug}}{\Sexpr{section_slug}}{\Sexpr{section_short}}{\Sexpr{section_title}}{\Sexpr{keyword}}
+% \mpa{\Sexpr{g$url}}{\Sexpr{g$ind}}{\Sexpr{g$pth}}{\Sexpr{g$cap}}{\Sexpr{g$src}}{\Sexpr{g$ori}}{\Sexpr{g$lub}}{\Sexpr{g$luo}}{\Sexpr{g$syn}}
+
+
+
+%-------------------------------------------------------------------------------
+% INDICATOR Staff Time
+<<echo=FALSE>>=
+section_slug <- "staff-time" # Section label
+section_title <- "Staff Time" # Figure title
+section_short <- "Staff Time" # TOC and page header
+keyword <- "Staff Time"
+# g <- ckan_res("")
+@
+\sh{\Sexpr{report_slug}}{\Sexpr{chapter_slug}}{\Sexpr{section_slug}}{\Sexpr{section_short}}{\Sexpr{section_title}}{\Sexpr{keyword}}
+% \mpa{\Sexpr{g$url}}{\Sexpr{g$ind}}{\Sexpr{g$pth}}{\Sexpr{g$cap}}{\Sexpr{g$src}}{\Sexpr{g$ori}}{\Sexpr{g$lub}}{\Sexpr{g$luo}}{\Sexpr{g$syn}}
+
+
+%-------------------------------------------------------------------------------
+% INDICATOR Education
+<<echo=FALSE>>=
+section_slug <- "education" # Section label
+section_title <- "Education" # Figure title
+section_short <- "Education" # TOC and page header
+keyword <- "Education"
+# g <- ckan_res("")
+@
+\sh{\Sexpr{report_slug}}{\Sexpr{chapter_slug}}{\Sexpr{section_slug}}{\Sexpr{section_short}}{\Sexpr{section_title}}{\Sexpr{keyword}}
+% \mpa{\Sexpr{g$url}}{\Sexpr{g$ind}}{\Sexpr{g$pth}}{\Sexpr{g$cap}}{\Sexpr{g$src}}{\Sexpr{g$ori}}{\Sexpr{g$lub}}{\Sexpr{g$luo}}{\Sexpr{g$syn}}
+
+
+
+%-------------------------------------------------------------------------------
+% Synopsis
+% TODO authors
+%-------------------------------------------------------------------------------
+\sy
+% on abundance
+% on biomass
+% on diversity
+% on pressures
+% on budget
+% onn staff time
+
+
+%-------------------------------------------------------------------------------
+% Management Implications
+% TODO authors to add each bullet point as \item at respective subheadings
+%-------------------------------------------------------------------------------
+\mi
+
+% Management Implications - General
+\migen
+\begin{itemize}
+% on abundance
+% on biomass
+% on diversity
+% on budget
+% onn staff time
+\item
+  An implication.
+\end{itemize}
+
+% Management Implications - Management and administrative framework
+\miadm
+\begin{itemize}
+\item
+  An implication
+\end{itemize}
+
+% Management Implications - Education and interpretation
+\miedu
+\begin{itemize}
+\item
+  An implication
+\end{itemize}
+
+% Management Implications - Public participation
+\mipub
+\begin{itemize}
+\item
+  An implication
+\end{itemize}
+
+% Management Implications - Patrol and enforcement
+\mipat
+\begin{itemize}
+\item
+ things.
+\end{itemize}
+
+% Management Implications - Management intervention and visitor infrastructure
+\mivis
+\begin{itemize}
+\item
+  An implication
+\end{itemize}
+
+% Management Implications - Research
+\mires
+\begin{itemize}
+\item
+  An implication
+\end{itemize}
+
+% Management Implications - Monitoring
+\mimon
+\begin{itemize}
+\item
+  An implication
+\end{itemize}
+
+
+%-------------------------------------------------------------------------------
+% References
+% TODO authors: paste references
+% TODO editor: sort, merge, and move references to own chapter
+%-------------------------------------------------------------------------------
+\rf
+
+%
+% End Asset Update \Sexpr{report_slug}-\Sexpr{chapter_slug}
+%-------------------------------------------------------------------------------
