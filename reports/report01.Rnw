@@ -28,7 +28,7 @@ img <- ckan_res("cc76f19f-7ec7-4975-b68a-d330d641fa12")
 %-------------------------------------------------------------------------------
 % Chapters: create in parts/
 %-------------------------------------------------------------------------------
-\SweaveInput{parts/chapter1.Rnw}
+% \SweaveInput{parts/chapter1.Rnw}
 \SweaveInput{global/backmatter.Rnw}
 \end{document}
 % EOF --------------------------------------------------------------------------
