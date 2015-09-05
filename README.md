@@ -41,6 +41,43 @@ into explanations of what's going on.
 
 
 ### Report automation
+#### Use case 4: Annual reporting
+A work group of 10 authors has the annual task of annually producing 12 
+data-driven reports. About 700 data sets sit as tidy packags of data (XLS or CSV), 
+code (SigmaPlot workbooks or R code) and mostly time series figures (PNG, JPEG 
+or PDF) in a CKAN catalogue. They are updated as soon as new data comes in 
+- some monthly, some quarterly, some annually and some irregularly.
+
+The CKAN datasets have metadata on when and by whom the data was updated last,
+as well as the correct attribution of ownership.
+
+Re-creating the same figure just with the latest data point added 700 times gets old
+real quick, so all of the XLS/SigmaPlot workflows are migrated to automated R scripts,
+which read the data directly from CKAN, produce the time series figure(s) and 
+upload the figures and the R code back to CKAN in one go.
+
+The 12 reports consist of about 200 chapters in total, which are updated 
+collaboratively at the end of each financial year. Working under vesion control 
+using git involves a learning curve, some moaning and a few (recoverable) hiccups,
+but is far more efficient and secure against accidental data loss than 
+emailing Word documents in multiple versions. The project is just not big enough
+to warrant the branch/pull request work flow, so everyone works on the master branch.
+The authors get away with working on the same branch, as they all work on separate
+chapters, and run into very few manual merges.
+
+Layouting and publishing the reports went from 6 weeks of manual typesetting 
+in the MS Office / email era to a few minutes compiling the 12 PDFs, 
+followed by an automated upload to CKAN.
+
+The target audience of the reports can grab the latest copy off CKAN, which includes
+the date of publishing, the date each chapter was written/reviewed/edited, and 
+underneath each figure, the date that the data shown in that figure was updated,
+as well as a link to the dataset on CKAN. This give the readers full, fine-grained
+information about the validity and currency of each morsel of information.
+
+The described process is a real-world scenario at the Marine Science Progrma of 
+the Department of Parks and Wildlife of Western Australia. CKAN-o-Sweave was 
+reverse engineered from that use case.
 
 ### Solution architecture and data flow
 
