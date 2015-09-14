@@ -1,43 +1,24 @@
 #' R functions to retrieve content from CKAN
+#'
+#' Source "ckan_secret.R" before sourcing this file
+#'
 #' @author Florian.Mayer@dpaw.wa.gov.au
-#' 
-require(RCurl)
-require(rjson)
-require(markdown)
-require(knitr)
-require(lubridate)
-require(Hmisc)
-require(scales)
+#'
 require(ckanr)
 require(ggplot2)
-
-# Default to DPaW internal data catalogue
-ckanr::ckanr_setup(url="http://internal-data.dpaw.wa.gov.au/")
-default_resource_id <- "ccc68eb7-8105-4cc8-8112-57bf1558e82f"
-
-#' Get CPR data from intermediary CSV by park and asset slug
-#' 
-#' Requires a CSV with raw data at the speficied or supplied URL
-#' The CSV used here is created in ../reports/publish.py
-#' 
-#' @param prk The park name as String
-#' @param ast The asset name as String
-#' @param url The URL of the CSV
-#' @return a data.frame with one row of factors park, asset, and the six CPR 
-#' indicator flags.
-#' @export
-getCPR <- function(prk, ast, url = "../reports/cpr.csv"
-  #url = ckan_res("ece209a7-5974-4e04-9711-ee6457bc4a59")$url
-  ){
-  cpr = read.table(url, header=TRUE, skip=0, sep=",")
-  subset(cpr, park == prk & asset == ast)
-}
+require(Hmisc)
+require(knitr)
+require(lubridate)
+require(markdown)
+require(RCurl)
+require(rjson)
+require(scales)
 
 #' Texify a string of text
-#' 
+#'
 #' Substitutes characters with special meaning in Latex
 #' with their Latex counterpart.
-#' 
+#'
 #' @param text A string of text to be substituted.
 #' @return The input text after substitution.
 #' @import Hmisc
@@ -60,13 +41,13 @@ texify <- function(text){
   text = gsub("≤", "$\\\\leq$", text)
   text = gsub("±", "$\\\\pm$", text)
   text = gsub("=", "$=$", text)
-  
+
   # add more substitutions as required
   return(Hmisc::escapeBS(text))
 }
 
 #' Return the value of a key in a dictionary or display a "missing" message
-#' 
+#'
 #' @param dict A dictionary, as returned by ckanr::package_show
 #' @param key A key as quoted string
 #' @param texify Whether to convert the value from markdown to latex (default: F)
@@ -75,7 +56,7 @@ get_key <- function(dict, key, texify=F){
   if (is.null(val)) {
     val = "not available"
     print(paste("Missing key:", key, "at", dict$url))
-  } 
+  }
   if (texify==T){ val <- texify(val)}
   val
 }
@@ -84,16 +65,16 @@ get_key <- function(dict, key, texify=F){
 #'
 #' Onto a named list containing CKAN API's resource_show() response result,
 #' various useful bits are added, such as the resource's package_show result,
-#' as well as vigorously abbreviated important bits of metadata used in the 
+#' as well as vigorously abbreviated important bits of metadata used in the
 #' Latex macro `ckr`.
-#' 
+#'
 #' @param resource_id An existing CKAN resource id
-#' @param url The base url of the resource's CKAN catalogue, 
+#' @param url The base url of the resource's CKAN catalogue,
 #'  optional, default: configured ckanr default
 #' @return A named list containing resource and dataset metadata:
-#'  top level: 
+#'  top level:
 #'    23 default `ckanr::resource_show` keys
-#'    d (containing 34 default `ckanr::package_show` keys) 
+#'    d (containing 34 default `ckanr::package_show` keys)
 #'    ind - the dataset's title (heading, texified)
 #'    syn - the dataset's description (synopsis, texified)
 #'    pth - the local file path if the url is downloaded with wget
@@ -102,49 +83,36 @@ get_key <- function(dict, key, texify=F){
 #'    src - the dataset's extra field "citation", texified
 #'    luo <- the dataset's "last updated on"
 #'    lub <- the dataset's maintainer (last updated by)
-#'  
-ckan_res <- function(resource_id, 
-                     url=get_default_url()){
+#'
+ckan_res <- function(resource_id,
+                     url = ckanr::get_default_url()){
   if (resource_id == "") resource_id <- default_resource_id
   r <- ckanr::resource_show(resource_id, url = url)
   d <- ckanr::package_show(r$package_id, url = url)
   r$d <- d
   r$ind <- texify(d$title)
-  r$syn <- ""#texify(d$notes) # a hack to exclude the unused synopsis
+  r$syn <- texify(d$notes)
   r$pth <- strsplit(r$url, "//")[[1]][2]
   r$cap <- texify(r$description)
-  r$ori <- paste0(url, "dataset/", d$id)
+  r$ori <- paste(url, "dataset", d$id, sep="/")
   r$src <- texify(d$citation) #get_key(d, "citation", texify=T)
   r$luo <- d$last_updated_on #get_key(d, "last_updated_on")
   r$lub <- d$maintainer
   r
 }
 
-#' Return an R data.frame with content from CKAN as required for MPA Figures
-#' 
-#' @param urlstring The resource id of the figure itself.
-#' @param type The Indicator type (Condition, Pressure, Response) - kept for 
-#'  backwards compatibility
-#' @param debug Debug noise 
-#' @param url The CKAN base url, optional, default: `ckanr::get_default_url()`
-mpa <- function(url, 
-  type = 'Condition', debug = FALSE, ckanurl=get_default_url()){
-  r <- ckan_res(strsplit(url, '/')[[1]][7])
-  r
-}
-
-#' Load a CSV from a URL
-#' 
+#' Load a CSV from a URL, parse nominated date columns as dates
+#'
 #' @param url The URL of a CSV file
-#' @param date_colnames The column names of date columns, default: 
+#' @param date_colnames The column names of date columns, default:
 #'    'date', 'Date', date.start', 'date.end', 'year', 'Year'
-#' @param date_formats The date formats to expect, default: 
+#' @param date_formats The date formats to expect, default:
 #'    'YmdHMSz', 'YmdHMS','Ymd','dmY', 'Y'
 #' @param timezone The timezone, default: 'Australia/Perth'
 #' @return A data.frame of the CSV, with parsed dates and strings as factors
 load_csv <- function(url,
-                     date_colnames = c('date', 'Date', 
-                                       'date.start', 'date.end', 
+                     date_colnames = c('date', 'Date',
+                                       'date.start', 'date.end',
                                        'start.date','end.date',
                                        'year', 'Year'),
                      date_formats = c('YmdHMSz', 'YmdHMS','Ymd','dmY', 'Y'),
@@ -153,8 +121,8 @@ load_csv <- function(url,
   cn <- names(df)
   df[cn %in% date_colnames] <- lapply(
     df[cn %in% date_colnames],
-    function(x){x<- lubridate::parse_date_time(x, 
-                                               orders = date_formats, 
+    function(x){x<- lubridate::parse_date_time(x,
+                                               orders = date_formats,
                                                tz = timezone)}
   )
   names(df) <- Hmisc::capitalize(names(df))
@@ -162,28 +130,28 @@ load_csv <- function(url,
 }
 
 #' Load CSV from CKAN given a resource id
-#' 
+#'
 #' @param res_id The resource id of a CKAN CSV resource
 #' @param ckanurl The base url of the CKAN catalogue, default: ckanr::get_default_url()
 #' @param parse_dates Whether to parse date_colnames as dates of format date_formats
-#'    into PosixCt 
-#' @param date_colnames The column names of date columns, default: 'date', 'Date', 
+#'    into PosixCt
+#' @param date_colnames The column names of date columns, default: 'date', 'Date',
 #'    'date.start', 'date.end', 'year', 'Year'
 #' @param date_formats The date formats to expect, default: 'YmdHMSz', 'YmdHMS','Ymd','dmY', 'Y'
 #' @param timezone The timezone, default: 'Australia/Perth'
 #' @return A data.frame of the CSV, with parsed dates and strings as factors
-load_ckan_csv <- function(res_id, 
+load_ckan_csv <- function(res_id,
                           ckanurl = ckanr::get_default_url(),
                           parse_dates = T,
-                          date_colnames = c('date', 'Date', 
+                          date_colnames = c('date', 'Date',
                                             'date.start', 'date.end',
                                             'start.date','end.date',
                                             'year', 'Year'),
                           date_formats = c('YmdHMSz', 'YmdHMS','Ymd','dmY', 'Y'),
                           timezone = 'Australia/Perth'){
   r <- ckan_res(res_id, url = ckanurl)
-  df <- load_csv(r$url, 
-                 date_colnames = date_colnames, 
+  df <- load_csv(r$url,
+                 date_colnames = date_colnames,
                  date_formats = date_formats,
                  timezone = timezone)
   df

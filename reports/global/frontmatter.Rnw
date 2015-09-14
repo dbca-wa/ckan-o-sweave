@@ -85,7 +85,7 @@ reference to the writing process.
 %	TABLE OF CONTENTS
 %----------------------------------------------------------------------------------------
 <<echo=FALSE>>=
-i <- ckan_res("5be7ebcd-42e3-46f4-8baa-e04a59b23041")
+i <- ckan_res("")
 @
 \write18{wget -x \Sexpr{i$url}}
 \chapterimage{\Sexpr{i$pth}}
@@ -99,7 +99,7 @@ i <- ckan_res("5be7ebcd-42e3-46f4-8baa-e04a59b23041")
 %----------------------------------------------------------------------------------------
 \thispagestyle{empty}
 <<echo=FALSE>>=
-i <- ckan_res("5be7ebcd-42e3-46f4-8baa-e04a59b23041")
+i <- ckan_res("")
 @
 \write18{wget -x \Sexpr{i$url}}
 \chapterimage{\Sexpr{i$pth}}

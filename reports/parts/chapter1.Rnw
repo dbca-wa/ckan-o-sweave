@@ -1,4 +1,5 @@
 % !Rnw root = ../report01.Rnw
+% the above line lets you "Compile PDF" from this file
 %-------------------------------------------------------------------------------
 % Asset Update Elasmobranchs (Sharks, Skates and Rays)
 %
@@ -10,7 +11,7 @@ contributors <- "Author 1, Author 2, Author 3"
 written <- "01/09/2015"
 reviewed <- ""
 edited <- ""
-i <- ckan_res("431cb74e-79b9-4e49-a87a-bb61e8d28d87")
+i <- ckan_res("")
 @
 \ch{\Sexpr{i$url}}{\Sexpr{i$pth}}{\Sexpr{chapter_title}}{\Sexpr{report_slug}}{\Sexpr{chapter_slug}}{\Sexpr{author}}{\Sexpr{contributors}}{\Sexpr{written}}
 
@@ -53,10 +54,10 @@ section_slug <- "abundance" # Section label
 section_title <- "Abundance" # Figure title
 section_short <- "Abundance" # TOC and page header
 keyword <- "Abundance"
-# g <- ckan_res("")
+g <- ckan_res("")
 @
 \sh{\Sexpr{report_slug}}{\Sexpr{chapter_slug}}{\Sexpr{section_slug}}{\Sexpr{section_short}}{\Sexpr{section_title}}{\Sexpr{keyword}}
-% \mpa{\Sexpr{g$url}}{\Sexpr{g$ind}}{\Sexpr{g$pth}}{\Sexpr{g$cap}}{\Sexpr{g$src}}{\Sexpr{g$ori}}{\Sexpr{g$lub}}{\Sexpr{g$luo}}{\Sexpr{g$syn}}
+\mpa{\Sexpr{g$url}}{\Sexpr{g$ind}}{\Sexpr{g$pth}}{\Sexpr{g$cap}}{\Sexpr{g$src}}{\Sexpr{g$ori}}{\Sexpr{g$lub}}{\Sexpr{g$luo}}{\Sexpr{g$syn}}
 
 
 %-------------------------------------------------------------------------------
@@ -66,7 +67,7 @@ section_slug <- "biomass" # Section label
 section_title <- "Biomass" # Figure title
 section_short <- "Biomass" # TOC and page header
 keyword <- "Biomass"
-# g <- ckan_res("")
+g <- ckan_res("")
 @
 \sh{\Sexpr{report_slug}}{\Sexpr{chapter_slug}}{\Sexpr{section_slug}}{\Sexpr{section_short}}{\Sexpr{section_title}}{\Sexpr{keyword}}
 % \mpa{\Sexpr{g$url}}{\Sexpr{g$ind}}{\Sexpr{g$pth}}{\Sexpr{g$cap}}{\Sexpr{g$src}}{\Sexpr{g$ori}}{\Sexpr{g$lub}}{\Sexpr{g$luo}}{\Sexpr{g$syn}}

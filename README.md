@@ -45,8 +45,8 @@ into explanations of what's going on.
 A work group of 10 authors has the annual task of annually producing 12 
 data-driven reports. About 700 data sets sit as tidy packags of data (XLS or CSV), 
 code (SigmaPlot workbooks or R code) and mostly time series figures (PNG, JPEG 
-or PDF) in a CKAN catalogue. They are updated as soon as new data comes in 
-- some monthly, some quarterly, some annually and some irregularly.
+or PDF) in a CKAN catalogue. They are updated as soon as new data comes in - 
+some monthly, some quarterly, some annually and some irregularly.
 
 The CKAN datasets have metadata on when and by whom the data was updated last,
 as well as the correct attribution of ownership.
@@ -88,11 +88,13 @@ version control, provides an audit trail of authorship and changes, allows
 collaborative editing, provides Latex markup (versus the very restrictive 
 Markdown markup in CKAN), and de-couples the report structure from CKAN's structure
 and organisation of digital content.
-* The solution architecture decouples data (and data management) from report 
-structure (defined by report editors) form report layout (defined in the template)
-from report content (written by authors).
+* The solution architecture decouples data (data managers and timing of updates) 
+from report structure (defined by report editors) 
+from report layout (defined in the template)
+from report content (written by authors) while providing fine-grained 
+permission management.
 * Automation speeds up and simplifies the report publishing process, and makes
-reports reproducible and defensible.
+reports reproducible and the delivered insight defensible.
 
 ### Choice of technologies
 
@@ -109,13 +111,26 @@ asset register for data, data processing code, and processing products.
 report template with a few neat layout tweaks, macros and environments.
 
 
-## Usage
-Prerequisites: 
+## How?
+You'll need: 
 
-* RStudio (Desktop or Server) with Latex and git installed.
-* Optional, but desireable: a CKAN with a few figures as PDF resources
+* RStudio IDE (Desktop or Server) with Latex and git installed.
+* The code, figures, maps and anything else you want to use in your reports 
+as CKAN resources.
+* Initially, you need to run `scripts/installation.R` to download and install
+required R packages.
 
 Clone this repository using RStudio, open reports/report01.Rnw and hit "Compile PDF".
 Read the PDF and the source code for an explanation of the basic structure and 
 instructions on how to extend this template into your report.
 
+A quick behind-the-scenes run-down:
+* The top-level report file links to all content parts: header, front and 
+backmatter, and the chapters.
+* The Latex header contains the Latex config (packages used, layout settings, 
+custom macros for you to use) from both the Legrand Orange book and this template.
+Add your latex customisations to this file.
+* The R code `scripts/ckan.R` provides connectivity to CKAN using the R library ckanR.
+Add your R customisations to this file.
+* Before you can push updates to CKAN, you need to copy `scripts/ckan_secret_template.R`
+to `scripts/ckan_secret.R` and set your CKAN API key in there. Do not share this file.

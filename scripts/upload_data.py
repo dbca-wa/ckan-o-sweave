@@ -16,7 +16,6 @@ env.use_ssh_config = True
 # dsid - the CKAN dataset id, under which the file has been uploaded as resource
 # rsid - the CKAN resource id of the file
 #------------------------------------------------------------------------------#
-DC = "http://internal-data.dpaw.wa.gov.au/"
 RES = [
   {
     # 14 mile = coral bay
@@ -98,27 +97,28 @@ RES = [
 # Main routine
 #-----------------------------------------------------------------------------#
 if __name__ == "__main__":
-    """Publish data to data cataloue
+    """
+    Publish data to data cataloue
     Requires a text file `secret.py` containing `CKAN="your-ckan-api-key"`
 
     """
-    
+
     d = os.path.dirname(os.path.realpath(__file__))
-    
+
     try:
-        from secret import CKAN
+        from secret import CKAN, API_KEY
     except ImportError:
         print("Authorisation key not found. Follow instructions in "
         "secret.py.template. Skipping upload.")
         sys.exit(0)
-    
-    print("Uploading Data to {0}".format(DC))
-    [ck.resource_update(d, r["resid"], r["file"], api_key=CKAN) for r in RES]
+
+    print("Uploading Data to {0}".format(CKAN))
+    [ck.resource_update(d, r["resid"], r["file"], api_key=API_KEY) for r in RES]
 
     [ck.set_last_updated_fields(
-      ck.package_show(r["dsid"]), 
-      api_key=CKAN, 
-      lub=os.environ["LOGNAME"], 
+      ck.package_show(r["dsid"]),
+      api_key=CKAN,
+      lub=os.environ["LOGNAME"],
       luo=datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     ) for r in RES]
 

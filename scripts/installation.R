@@ -23,6 +23,7 @@ install.packages('markdown')
 install.packages('knitr')
 install.packages('stringr')
 install.packages('dplyr')
+install.packages('httr')
 
 install.packages('devtools')
 library(devtools); devtools::install_github('ropensci/ckanr')
