@@ -1,7 +1,7 @@
 %-------------------------------------------------------------------------------
 % An example report
 %
-% Modify the (re-usaable) title page layout and structure in global/frontmatter.Rnw
+% Modify the (re-usable) title page layout and structure in global/frontmatter.Rnw
 % Define the report-specific content in variables below.
 % IMPORTANT set work dir to the location of this file, e.g.:
 % setwd("~/projects/datawagovau/ckan-o-sweave/reports")
@@ -25,7 +25,7 @@ mpa_report_title <- "Annual Marine Protected Area Biodiversity Assets and Social
 mpa_mmu <- "Marine Monitoring Unit, Western Australian Marine Monitoring Program (WAMMP)"
 mpa_mmu_msp <- "Marine Science Program, Science and Conservation Division, Department of Parks and Wildlife"
 mpa_mmu_address <- "17 Dick Perry Avenue, Kensington, Western Australia 6151"
-img <- ckan_res("")
+img <- ckan_res("7a19940b-6697-4fe8-a03e-60c99bb606a6")
 @
 \SweaveInput{global/frontmatter.Rnw}
 %-------------------------------------------------------------------------------

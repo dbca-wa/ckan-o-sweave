@@ -11,7 +11,7 @@ contributors <- "Author 1, Author 2, Author 3"
 written <- "01/09/2015"
 reviewed <- ""
 edited <- ""
-i <- ckan_res("")
+i <- ckan_res("7a19940b-6697-4fe8-a03e-60c99bb606a6")
 @
 \ch{\Sexpr{i$url}}{\Sexpr{i$pth}}{\Sexpr{chapter_title}}{\Sexpr{report_slug}}{\Sexpr{chapter_slug}}{\Sexpr{author}}{\Sexpr{contributors}}{\Sexpr{written}}
 

@@ -32,7 +32,7 @@ REPORTS = [
 #-----------------------------------------------------------------------------#
 # CKAN API interaction
 #-----------------------------------------------------------------------------#
-def package_show(dataset_id, api_url="{0}api/3/action/".format(CKAN)):
+def package_show(dataset_id, ckan_url):
     """
     Return a JSON dictionary of dataset details for a given dataset id.
 
@@ -41,13 +41,13 @@ def package_show(dataset_id, api_url="{0}api/3/action/".format(CKAN)):
 
     :return: a JSON dictionary of dataset details
     """
-    r = requests.get("{0}package_show?id={1}".format(api_url, dataset_id))
+    r = requests.get("{0}/api/3/action/package_show?id={1}".format(ckan_url, dataset_id))
     if r.status_code == 200:
       return json.loads(r.content)["result"]
     else:
       return None
 
-def resource_show(resource_id, api_url="{0}api/3/action/".format(CKAN)):
+def resource_show(resource_id, ckan_url):
     """
     Return a JSON dictionary of dataset details for a given dataset id.
 
@@ -56,13 +56,13 @@ def resource_show(resource_id, api_url="{0}api/3/action/".format(CKAN)):
 
     :return: a JSON dictionary of dataset details
     """
-    r = requests.get("{0}resource_show?id={1}".format(api_url, resource_id))
+    r = requests.get("{0}/api/3/action/resource_show?id={1}".format(ckan_url, resource_id))
     if r.status_code == 200:
       return json.loads(r.content)["result"]
     else:
       return None
 
-def set_last_updated_fields(dataset_dict, api_url="{0}api/3/action/".format(CKAN),
+def set_last_updated_fields(dataset_dict, ckan_url,
     api_key=None, lub="", luo=datetime.now().strftime("%Y-%m-%d %H:%M:%S")):
     """
     Updates a dataset dictionary and posts back to CKAN.
@@ -75,7 +75,7 @@ def set_last_updated_fields(dataset_dict, api_url="{0}api/3/action/".format(CKAN
     :param luo: date string of update
     :return: None
     """
-    update_url = "{0}package_update".format(api_url)
+    update_url = "{0}/api/3/action/package_update".format(ckan_url)
     headers = {'Authorization': api_key,
         'content-type': 'application/x-www-form-urlencoded'}
 
@@ -90,8 +90,7 @@ def set_last_updated_fields(dataset_dict, api_url="{0}api/3/action/".format(CKAN
     print("Setting 'Last updated by (Maintainer)' to "
           "{0}, 'Last updated on' to {1}".format(lub, luo))
 
-def resource_update(filedir, res_id, filepath,
-  api_url="{0}api/3/action/".format(CKAN), api_key=None):
+def resource_update(filedir, res_id, filepath, ckan_url, api_key=None):
   """
   Update the file attachment of a given resource ID.
 
@@ -102,12 +101,12 @@ def resource_update(filedir, res_id, filepath,
 
   :return: None
   """
-  res = resource_show(res_id)
+  res = resource_show(res_id, ckan_url)
   res["state"] = "active"
   res["last_modified"] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
   if os.path.isfile(os.path.join(filedir, filepath)):
-    r = requests.post("{0}resource_update".format(api_url),
+    r = requests.post("{0}/api/3/action/resource_update".format(ckan_url),
               #data={"id": res_id},
               data=res,
               headers={"Authorization": api_key},
@@ -148,16 +147,16 @@ if __name__ == "__main__":
         "secret.py.template. Skipping PDF upload.")
         sys.exit(0)
 
-    p = package_show(PACKAGE_ID);
+    p = package_show(PACKAGE_ID, CKAN)
 
     if not p:
         print("Data catalogue not responding, skipping PDF upload.")
         sys.exit(0)
 
     print("Uploading report PDFs to {0}".format(CKAN))
-    [resource_update(d, r["resid"], r["file"], api_key=API_KEY) for r in REPORTS]
+    [resource_update(d, r["resid"], r["file"], CKAN, API_KEY) for r in REPORTS]
 
-    set_last_updated_fields(p, api_key=API_KEY, lub=os.environ["LOGNAME"],
-        luo=datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
+    set_last_updated_fields(p, CKAN, API_KEY, lub=os.environ["LOGNAME"],
+      luo=datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
 
     print("Successfully uploaded all files to the data catalogue.")
