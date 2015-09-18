@@ -112,15 +112,19 @@ report template with a few neat layout tweaks, macros and environments.
 
 
 ## How?
-You'll need: 
+To compile this template into a PDF, you'll need:
 
 * RStudio IDE (Desktop or Server) with Latex and git installed system-wide.
 * The code, figures, maps and anything else you want to use in your reports 
-as CKAN resources.
-* Initially, you need to run `scripts/installation.R` to download and install
-required R packages.
+as CKAN resources. The template will compile as-is, its resources already exist.
 
-Clone this repository using RStudio, open reports/report01.Rnw and hit "Compile PDF".
+With these prerequisites:
+
+* Fork this repo into your own GitHub account and copy the clone URL.
+* In RStudio, create new project from version control, paste your fork's clone URL.
+* One-off, run `scripts/installation.R` to download and install required R packages.
+* Open `reports/report01.Rnw`, hit "Compile PDF" to compile the template PDF.
+
 Read the PDF and the source code for an explanation of the basic structure and 
 instructions on how to extend this template into your report.
 
@@ -129,10 +133,8 @@ A quick behind-the-scenes run-down:
 backmatter, and the chapters.
 * The Latex header contains the Latex config (packages used, layout settings, 
 custom macros for you to use) from both the Legrand Orange book and this template.
-Add your latex customisations to this file.
 * The R code `scripts/ckan.R` provides connectivity to CKAN using the R library ckanR.
-Add your R customisations to this file.
-* Before you can push updates to CKAN, you need to copy `scripts/ckan_secret_template.R`
+* Before you can upload the report to CKAN, you need to copy `scripts/ckan_secret_template.R`
 to `scripts/ckan_secret.R` and set your CKAN API key in there. Do not share this file.
 
 ## Need help?
