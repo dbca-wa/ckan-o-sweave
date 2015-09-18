@@ -114,7 +114,7 @@ Furthermore, the caption shows the CKAN data set's "citation" as "source of data
 and "maintainer" plus "last\_updated\_on" to indicate how recent the presented data is.
 It also sets a label for cross-references, which like the label from the section
 heading consists of the internal variables "report\_slug", "chapter\_slug" and
-"section_slug".
+"section\_slug".
 
 The two \LaTeX\ macros are fed with content from the preceding chunk of R code.
 The variables \texttt{section\_slug}, \texttt{section\_title},

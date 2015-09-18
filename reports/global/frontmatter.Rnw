@@ -1,4 +1,3 @@
-% !Rnw root = ../report01.Rnw
 %----------------------------------------------------------------------------------------
 %  TITLE PAGE
 %----------------------------------------------------------------------------------------
@@ -72,11 +71,10 @@ The report template is distributed under
 %\noindent \textsc{book-website.com}\\ % URL
 
 \begin{remark}
-For authors and contributors to this report: Please read \nameref{sec:report-structure}
-(p.(\pageref{sec:report-structure})) for an explanation of the report's structure,
-and see \nameref{sec:report-workflow} (p.(\pageref{sec:report-workflow})) and
-\nameref{sec:report-manual} (p.(\pageref{sec:report-manual})) for an in-depth technical
-reference to the writing process.
+For authors and contributors to this report: Please see
+\nameref{sec:report-workflow} (p.(\pageref{sec:report-workflow})) and
+\nameref{sec:report-manual} (p.(\pageref{sec:report-manual}))
+for an in-depth technical reference to the writing process.
 \end{remark}
 
 %----------------------------------------------------------------------------------------
