@@ -66,9 +66,9 @@ the production process is documented
 \noindent\textbf{\Large Licence and Copyright}\\
 The report template is distributed under
 \href{http://creativecommons.org/licenses/by-nc-sa/3.0/}{CC BY-NC-SA 3.0} license.
-\noindent Copyright \copyright \Sexpr{mpa_year} \Sexpr{mpa_mmu_msp}\\ % Copyright notice
-\noindent \textsc{Published by \Sexpr{mpa_mmu_msp}}\\ % Publisher
-%\noindent \textsc{book-website.com}\\ % URL
+\noindent Copyright \copyright 2014-2015 Florian Mayer for the data.wa.gov.au team\\ % Copyright notice
+% \noindent \textsc{Published by \Sexpr{mpa_mmu_msp}}\\ % Publisher
+% \noindent \textsc{book-website.com}\\ % URL
 
 \begin{remark}
 For authors and contributors to this report: Please see
