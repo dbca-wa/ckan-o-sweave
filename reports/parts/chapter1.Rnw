@@ -8,7 +8,7 @@ chapter_slug <- "ch01"
 chapter_title <- "Chapter 01"
 author <- "Florian Mayer"
 contributors <- "Author 1, Author 2, Author 3"
-written <- "01/09/2015"
+written <- "18/09/2015"
 reviewed <- ""
 edited <- ""
 i <- ckan_res("7a19940b-6697-4fe8-a03e-60c99bb606a6")
@@ -20,9 +20,13 @@ i <- ckan_res("7a19940b-6697-4fe8-a03e-60c99bb606a6")
 % Authors to write
 %-------------------------------------------------------------------------------
 \su
-This chapter demonstrates a few features of CKAN o' Sweave.
+This chapter demonstrates a few features of CKAN o' Sweave which are of interest
+to future report editors using this template. This is to say, this chapter will
+make most sense to you if you intend to create a new report based on this template,
+have compiled this report yourself and compare the source code of
+\texttt{reports/parts/chapter01.Rnw} with the compiled output in the PDF.
 
-Primarily, it displays CKAN resources as figures, and uses metadata from the
+Primarily, this chapters displays CKAN resources as figures, and uses metadata from the
 CKAN datasets to annotate the figure and link to the points of truth of the data
 shown. A detailed explanation is shown after the first figure.
 
@@ -43,7 +47,7 @@ vocabulary. Since the actual markup of the desired presentation (a \LaTeX\ table
 is quite complicated, the error-prone process of letting authors typeset \LaTeX\
 tables was replaced with authors simply populating a macro with symbols --
 $+$ for desirable values, $0$ for neutral values, and $-$ for undesirable values.
-An inline comment in the chapter's source file us not shown in the compiled PDF
+An in-line comment in the chapter's source file us not shown in the compiled PDF
 version, but is visible to authors when editing the chapter. The comment explains
 the usage of the macro and the meaning of the possible symbols.
 
@@ -89,16 +93,54 @@ g <- ckan_res("781ffeb6-d704-44e2-8dc6-51eba39bf8fb")
 \sh{\Sexpr{report_slug}}{\Sexpr{chapter_slug}}{\Sexpr{section_slug}}{\Sexpr{section_short}}{\Sexpr{section_title}}{\Sexpr{keyword}}
 \mpa{\Sexpr{g$url}}{\Sexpr{g$ind}}{\Sexpr{g$pth}}{\Sexpr{g$cap}}{\Sexpr{g$src}}{\Sexpr{g$ori}}{\Sexpr{g$lub}}{\Sexpr{g$luo}}{\Sexpr{g$syn}}
 
-This subsection is produced by two macros, \texttt{\textbackslash sh} and \texttt{\textbackslash mpa}.
-The first macro generates the subsection heading--hence its mnemonic name "sh"--,
-sets the page header and table of contents link, generates an internal label for
-cross-references, and injects a keyword into the index.
+As context for the following section, it is recommended to look at the source
+at \texttt{reports/parts/chapter01.Rnw}, as the code referred to is only visible
+there, but hidden in the compiled PDF version.
 
-The second macro generates the figure - its idiosyncratic name "mpa" is a legacy
-from  the real-life use case it was initially created for.
+Invisible in the compiled PDF version, this subsection is produced by two macros,
+\texttt{\textbackslash sh} and \texttt{\textbackslash mpa}.
+The first macro generates the subsection heading--hence its mnemonic name
+\texttt{\textbackslash sh}--,sets the page header and table of contents link,
+generates an internal label for cross-references, and injects a keyword into the index.
+If it is undesirable to have a figure title, \texttt{\textbackslash sh} can simply
+be commented out in the source.
+
+The second macro generates the figure - its idiosyncratic name \texttt{\textbackslash mpa}
+is a legacy from  the real-life use case it was initially created for.
 It first downloads the CKAN resource to a local file, breaking up the url path
-into a corresponding local file path.
+into a corresponding local file path. Subsequently, the file is included as a
+figure of 80 \% text width, and the CKAN resource description is used as caption.
+Furthermore, the caption shows the CKAN data set's "citation" as "source of data",
+and "maintainer" plus "last\_updated\_on" to indicate how recent the presented data is.
+It also sets a label for cross-references, which like the label from the section
+heading consists of the internal variables "report\_slug", "chapter\_slug" and
+"section_slug".
 
+The two \LaTeX\ macros are fed with content from the preceding chunk of R code.
+The variables \texttt{section\_slug}, \texttt{section\_title},
+\texttt{section\_short} and \texttt{keyword} are simple character strings, whereas the
+variable \texttt{g} is a named list, containing the full CKAN resource metadata
+of the resource ID given to the R function \texttt{ckan\_res\(\)},
+plus the full CKAN data set's metadata, plus a few hand-selected metadata keys in
+custom variable names which are used in the macro.
+
+If it is undesirable to show the figure, the \texttt{\textbackslash mpa} macro
+can be commented out - however, the R variable \texttt{g} must be defined at least
+once previously in the same file, as any occurrence of \texttt{\textbackslash Sexpr\{\}}
+will be evaluated while compiling the PDF.
+
+
+To create new figures, simply copy the R chunk and the two macros
+\texttt{\textbackslash sh} and \texttt{\textbackslash mpa}, and change the
+variable values (namely, section heading, keyword, and CKAN resource ID).
+The remainder of this file (in its source code) shows the recurring structure.
+
+The custom R function \texttt{ckan\_res()} is defined in \texttt{scripts/ckan.R};
+the \LaTeX\ macros are defined in \texttt{reports/global/header.tex}.
+To add your own R code and \LaTeX\ macros, it is recommended to do so in separate
+files and to include those files in the same manner as \texttt{ckan.R} and
+\texttt{header.tex} are included. This will allow to merge upstream updates without
+conflicts into forks of CKAN o' Sweave.
 
 %-------------------------------------------------------------------------------
 % INDICATOR Biomass
@@ -110,9 +152,10 @@ keyword <- "Biomass"
 g <- ckan_res("")
 @
 \sh{\Sexpr{report_slug}}{\Sexpr{chapter_slug}}{\Sexpr{section_slug}}{\Sexpr{section_short}}{\Sexpr{section_title}}{\Sexpr{keyword}}
-% \mpa{\Sexpr{g$url}}{\Sexpr{g$ind}}{\Sexpr{g$pth}}{\Sexpr{g$cap}}{\Sexpr{g$src}}{\Sexpr{g$ori}}{\Sexpr{g$lub}}{\Sexpr{g$luo}}{\Sexpr{g$syn}}
+\mpa{\Sexpr{g$url}}{\Sexpr{g$ind}}{\Sexpr{g$pth}}{\Sexpr{g$cap}}{\Sexpr{g$src}}{\Sexpr{g$ori}}{\Sexpr{g$lub}}{\Sexpr{g$luo}}{\Sexpr{g$syn}}
 
-
+Welcome to the remainder of the chapter, where headings don't matter and the
+data is made up.
 
 %-------------------------------------------------------------------------------
 % INDICATOR Diversity
@@ -121,10 +164,10 @@ section_slug <- "diversity" # Section label
 section_title <- "Diversity" # Figure title
 section_short <- "Diversity" # TOC and page header
 keyword <- "Diversity"
-# g <- ckan_res("")
+g <- ckan_res("")
 @
 \sh{\Sexpr{report_slug}}{\Sexpr{chapter_slug}}{\Sexpr{section_slug}}{\Sexpr{section_short}}{\Sexpr{section_title}}{\Sexpr{keyword}}
-% \mpa{\Sexpr{g$url}}{\Sexpr{g$ind}}{\Sexpr{g$pth}}{\Sexpr{g$cap}}{\Sexpr{g$src}}{\Sexpr{g$ori}}{\Sexpr{g$lub}}{\Sexpr{g$luo}}{\Sexpr{g$syn}}
+\mpa{\Sexpr{g$url}}{\Sexpr{g$ind}}{\Sexpr{g$pth}}{\Sexpr{g$cap}}{\Sexpr{g$src}}{\Sexpr{g$ori}}{\Sexpr{g$lub}}{\Sexpr{g$luo}}{\Sexpr{g$syn}}
 
 
 
@@ -140,10 +183,10 @@ section_slug <- "incidents" # Section label
 section_title <- "Incidents" # Figure title
 section_short <- "Incidents" # TOC and page header
 keyword <- "Incidents"
-# g <- ckan_res("")
+g <- ckan_res("")
 @
 \sh{\Sexpr{report_slug}}{\Sexpr{chapter_slug}}{\Sexpr{section_slug}}{\Sexpr{section_short}}{\Sexpr{section_title}}{\Sexpr{keyword}}
-% \mpa{\Sexpr{g$url}}{\Sexpr{g$ind}}{\Sexpr{g$pth}}{\Sexpr{g$cap}}{\Sexpr{g$src}}{\Sexpr{g$ori}}{\Sexpr{g$lub}}{\Sexpr{g$luo}}{\Sexpr{g$syn}}
+\mpa{\Sexpr{g$url}}{\Sexpr{g$ind}}{\Sexpr{g$pth}}{\Sexpr{g$cap}}{\Sexpr{g$src}}{\Sexpr{g$ori}}{\Sexpr{g$lub}}{\Sexpr{g$luo}}{\Sexpr{g$syn}}
 
 %-------------------------------------------------------------------------------
 % INDICATOR Wildlife Encounters
@@ -152,10 +195,10 @@ section_slug <- "encounters" # Section label
 section_title <- "Wildlife Encounters" # Figure title
 section_short <- "Wildlife Encounters" # TOC and page header
 keyword <- "Wildlife Encounters"
-# g <- ckan_res("")
+g <- ckan_res("")
 @
 \sh{\Sexpr{report_slug}}{\Sexpr{chapter_slug}}{\Sexpr{section_slug}}{\Sexpr{section_short}}{\Sexpr{section_title}}{\Sexpr{keyword}}
-% \mpa{\Sexpr{g$url}}{\Sexpr{g$ind}}{\Sexpr{g$pth}}{\Sexpr{g$cap}}{\Sexpr{g$src}}{\Sexpr{g$ori}}{\Sexpr{g$lub}}{\Sexpr{g$luo}}{\Sexpr{g$syn}}
+\mpa{\Sexpr{g$url}}{\Sexpr{g$ind}}{\Sexpr{g$pth}}{\Sexpr{g$cap}}{\Sexpr{g$src}}{\Sexpr{g$ori}}{\Sexpr{g$lub}}{\Sexpr{g$luo}}{\Sexpr{g$syn}}
 
 
 %-------------------------------------------------------------------------------
@@ -170,10 +213,10 @@ section_slug <- "budget" # Section label
 section_title <- "Operational Funds" # Figure title
 section_short <- "Operational Funds" # TOC and page header
 keyword <- "Operational Funds"
-# g <- ckan_res("")
+g <- ckan_res("")
 @
 \sh{\Sexpr{report_slug}}{\Sexpr{chapter_slug}}{\Sexpr{section_slug}}{\Sexpr{section_short}}{\Sexpr{section_title}}{\Sexpr{keyword}}
-% \mpa{\Sexpr{g$url}}{\Sexpr{g$ind}}{\Sexpr{g$pth}}{\Sexpr{g$cap}}{\Sexpr{g$src}}{\Sexpr{g$ori}}{\Sexpr{g$lub}}{\Sexpr{g$luo}}{\Sexpr{g$syn}}
+\mpa{\Sexpr{g$url}}{\Sexpr{g$ind}}{\Sexpr{g$pth}}{\Sexpr{g$cap}}{\Sexpr{g$src}}{\Sexpr{g$ori}}{\Sexpr{g$lub}}{\Sexpr{g$luo}}{\Sexpr{g$syn}}
 
 
 
@@ -184,10 +227,10 @@ section_slug <- "staff-time" # Section label
 section_title <- "Staff Time" # Figure title
 section_short <- "Staff Time" # TOC and page header
 keyword <- "Staff Time"
-# g <- ckan_res("")
+g <- ckan_res("")
 @
 \sh{\Sexpr{report_slug}}{\Sexpr{chapter_slug}}{\Sexpr{section_slug}}{\Sexpr{section_short}}{\Sexpr{section_title}}{\Sexpr{keyword}}
-% \mpa{\Sexpr{g$url}}{\Sexpr{g$ind}}{\Sexpr{g$pth}}{\Sexpr{g$cap}}{\Sexpr{g$src}}{\Sexpr{g$ori}}{\Sexpr{g$lub}}{\Sexpr{g$luo}}{\Sexpr{g$syn}}
+\mpa{\Sexpr{g$url}}{\Sexpr{g$ind}}{\Sexpr{g$pth}}{\Sexpr{g$cap}}{\Sexpr{g$src}}{\Sexpr{g$ori}}{\Sexpr{g$lub}}{\Sexpr{g$luo}}{\Sexpr{g$syn}}
 
 
 %-------------------------------------------------------------------------------
@@ -197,10 +240,10 @@ section_slug <- "education" # Section label
 section_title <- "Education" # Figure title
 section_short <- "Education" # TOC and page header
 keyword <- "Education"
-# g <- ckan_res("")
+g <- ckan_res("")
 @
 \sh{\Sexpr{report_slug}}{\Sexpr{chapter_slug}}{\Sexpr{section_slug}}{\Sexpr{section_short}}{\Sexpr{section_title}}{\Sexpr{keyword}}
-% \mpa{\Sexpr{g$url}}{\Sexpr{g$ind}}{\Sexpr{g$pth}}{\Sexpr{g$cap}}{\Sexpr{g$src}}{\Sexpr{g$ori}}{\Sexpr{g$lub}}{\Sexpr{g$luo}}{\Sexpr{g$syn}}
+\mpa{\Sexpr{g$url}}{\Sexpr{g$ind}}{\Sexpr{g$pth}}{\Sexpr{g$cap}}{\Sexpr{g$src}}{\Sexpr{g$ori}}{\Sexpr{g$lub}}{\Sexpr{g$luo}}{\Sexpr{g$syn}}
 
 
 
@@ -209,6 +252,7 @@ keyword <- "Education"
 % TODO authors
 %-------------------------------------------------------------------------------
 \sy
+Some synopsis of the data shown above.
 % on abundance
 % on biomass
 % on diversity
@@ -293,5 +337,5 @@ keyword <- "Education"
 \rf
 
 %
-% End Asset Update \Sexpr{report_slug}-\Sexpr{chapter_slug}
+% End chapter \Sexpr{report_slug}-\Sexpr{chapter_slug}
 %-------------------------------------------------------------------------------

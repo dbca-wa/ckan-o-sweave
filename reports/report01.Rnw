@@ -13,18 +13,18 @@
 source('../scripts/ckan_secret.R')
 source('../scripts/ckan.R')
 mpa_name <- "The report title"
-report_slug <- "nkmp"
+report_slug <- "example1"
 mpa_period <- "2014-2015"
 mpa_year <- "2015"
 mpa_editor <- "John Doe, Jane Doette"
 mpa_editor_reverse <- "Doe J, Doette J"
 mpa_contributors <- paste0("John Johnson, Steven Stevenson")
 mpa_contributors_reverse <- paste0("Johnson J, Stevenson S")
-mpa_wammp <- "Western Australian Marine Monitoring Program"
-mpa_report_title <- "Annual Marine Protected Area Biodiversity Assets and Social Values Report"
-mpa_mmu <- "Marine Monitoring Unit, Western Australian Marine Monitoring Program (WAMMP)"
-mpa_mmu_msp <- "Marine Science Program, Science and Conservation Division, Department of Parks and Wildlife"
-mpa_mmu_address <- "17 Dick Perry Avenue, Kensington, Western Australia 6151"
+mpa_wammp <- "data.wa.gov.au"
+mpa_report_title <- "An example report title"
+mpa_mmu <- "The data.wa.gov.au initiative of Western Australia"
+mpa_mmu_msp <- "Address line 1"
+mpa_mmu_address <- "Address line 2"
 img <- ckan_res("7a19940b-6697-4fe8-a03e-60c99bb606a6")
 @
 \SweaveInput{global/frontmatter.Rnw}

@@ -43,7 +43,7 @@ into explanations of what's going on.
 ### Report automation
 #### Use case 4: Annual reporting
 A work group of 10 authors has the annual task of annually producing 12 
-data-driven reports. About 700 data sets sit as tidy packags of data (XLS or CSV), 
+data-driven reports. About 700 data sets sit as tidy packages of data (XLS or CSV), 
 code (SigmaPlot workbooks or R code) and mostly time series figures (PNG, JPEG 
 or PDF) in a CKAN catalogue. They are updated as soon as new data comes in - 
 some monthly, some quarterly, some annually and some irregularly.
@@ -57,7 +57,7 @@ which read the data directly from CKAN, produce the time series figure(s) and
 upload the figures and the R code back to CKAN in one go.
 
 The 12 reports consist of about 200 chapters in total, which are updated 
-collaboratively at the end of each financial year. Working under vesion control 
+collaboratively at the end of each financial year. Working under version control 
 using git involves a learning curve, some moaning and a few (recoverable) hiccups,
 but is far more efficient and secure against accidental data loss than 
 emailing Word documents in multiple versions. The project is just not big enough
@@ -75,7 +75,7 @@ underneath each figure, the date that the data shown in that figure was updated,
 as well as a link to the dataset on CKAN. This give the readers full, fine-grained
 information about the validity and currency of each morsel of information.
 
-The described process is a real-world scenario at the Marine Science Progrma of 
+The described process is a real-world scenario at the Marine Science Program of 
 the Department of Parks and Wildlife of Western Australia. CKAN-o-Sweave was 
 reverse engineered from that use case.
 
@@ -114,7 +114,7 @@ report template with a few neat layout tweaks, macros and environments.
 ## How?
 You'll need: 
 
-* RStudio IDE (Desktop or Server) with Latex and git installed.
+* RStudio IDE (Desktop or Server) with Latex and git installed system-wide.
 * The code, figures, maps and anything else you want to use in your reports 
 as CKAN resources.
 * Initially, you need to run `scripts/installation.R` to download and install

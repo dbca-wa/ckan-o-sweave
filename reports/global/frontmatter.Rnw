@@ -54,16 +54,14 @@ Australia. pp.xx-xx.
 
 \noindent\textbf{\Large Online Resources}\\
 This report bases on the template
-\href{https://bitbucket.org/dpaw/ckan-o-sweave}{CKAN--o--Sweave} by
+\href{https://github.com/datawagovau/ckan-o-sweave}{CKAN--o--Sweave} by
 \href{mailto:Florian.Mayer@dpaw.wa.gov.au}{Florian Mayer}, which bases on
 the \href{http://www.latextemplates.com/template/the-legrand-orange-book}{The
 Legrand Orange Book} by \href{mailto:legrand.mathias@gmail.com}{Mathias Legrand}.
-The source of this report is under \href{https://bitbucket.org/dpaw/mpa-reporting/overview}{version control}.
-To author content, contact \href{mailto:Florian.Mayer@dpaw.wa.gov.au}{Florian Mayer}.
-The latest working versions are available in the
-\href{http://internal-data.dpaw.wa.gov.au/dataset/mpa-reports}{internal DPaW data catalog};
-the production process is documented on the
-\href{http://data-demo.dpaw.wa.gov.au/dataset/report-automation}{public DPaW data catalog}.
+The latest working versions of this template are available at
+\href{http://catalogue.alpha.data.wa.gov.au/dataset/data-wa-gov-au}{data.wa.gov.au (alpha)};
+the production process is documented
+\href{http://data-demo.dpaw.wa.gov.au/dataset/report-automation}{here}.
 \vspace{1cm}
 
 \noindent\textbf{\Large Licence and Copyright}\\
