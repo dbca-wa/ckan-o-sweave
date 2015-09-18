@@ -134,3 +134,11 @@ Add your latex customisations to this file.
 Add your R customisations to this file.
 * Before you can push updates to CKAN, you need to copy `scripts/ckan_secret_template.R`
 to `scripts/ckan_secret.R` and set your CKAN API key in there. Do not share this file.
+
+## Need help?
+As this template mashes up different technologies and languages (R, Latex, 
+Python, make, CKAN), there's a multitude of things that can go drastically right 
+or drastically wrong.
+Should you stub your toes while getting this template to work, please submit an
+[issue](https://github.com/datawagovau/ckan-o-sweave/issues).
+Any constructive feedback is appreciated, pull requests even more so.
