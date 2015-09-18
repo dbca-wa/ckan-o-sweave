@@ -1,12 +1,12 @@
 % !Rnw root = ../report01.Rnw
 % the above line lets you "Compile PDF" from this file
 %-------------------------------------------------------------------------------
-% Asset Update Elasmobranchs (Sharks, Skates and Rays)
+% Chapter 01
 %
 <<echo=FALSE>>=
 chapter_slug <- "ch01"
 chapter_title <- "Chapter 01"
-author <- "Main Author"
+author <- "Florian Mayer"
 contributors <- "Author 1, Author 2, Author 3"
 written <- "01/09/2015"
 reviewed <- ""
@@ -20,13 +20,40 @@ i <- ckan_res("7a19940b-6697-4fe8-a03e-60c99bb606a6")
 % Authors to write
 %-------------------------------------------------------------------------------
 \su
+This chapter demonstrates a few features of CKAN o' Sweave.
+
+Primarily, it displays CKAN resources as figures, and uses metadata from the
+CKAN datasets to annotate the figure and link to the points of truth of the data
+shown. A detailed explanation is shown after the first figure.
+
+Furthermore, it shows the use of a few \LaTeX macros. This centralises commonly
+used text fragments, such as recurring headings, into a single, maintainable,
+point of truth. As an example, the heading "Summary" of this subsection
+is inserted with the macro \texttt{\textbackslash su}.
+This comes in handy where multiple chapters require the same structure.
+
+\LaTeX\ macros also allow to simplify complicated markup, such as a \LaTeX\
+table, into a user-friendly, easy to use macro.
+
+One example is the following section.
+It shows an overall assessment, which is provided by the chapter's
+respective authors based on their interpretation of the data shown in the figures.
+The assessment follows a strict traffic light colour coding and uses a limited
+vocabulary. Since the actual markup of the desired presentation (a \LaTeX\ table)
+is quite complicated, the error-prone process of letting authors typeset \LaTeX\
+tables was replaced with authors simply populating a macro with symbols --
+$+$ for desirable values, $0$ for neutral values, and $-$ for undesirable values.
+An inline comment in the chapter's source file us not shown in the compiled PDF
+version, but is visible to authors when editing the chapter. The comment explains
+the usage of the macro and the meaning of the possible symbols.
+
 
 %-------------------------------------------------------------------------------
 % CPR Assessment
 % TODO authors to update ONLY last \assrow
 % Positive = desirable, Negative = undesirable
-% report_slug: The park acronym
-% chapter_title: The asset name
+% report_slug: The report acronym
+% chapter_title: The chapter name
 % mpa_period: The FY of this assessment
 % Argument 4: Condition Assessment: ++ + 0 - --
 % Argument 5: Condition Confidence: + 0 -
@@ -47,6 +74,9 @@ i <- ckan_res("7a19940b-6697-4fe8-a03e-60c99bb606a6")
 %-------------------------------------------------------------------------------
 \co
 
+This section shows the "condition" of some biodiversity assets.
+The figures shown are purely for illustrative purposes.
+
 %-------------------------------------------------------------------------------
 % INDICATOR Abundance
 <<echo=FALSE>>=
@@ -54,10 +84,20 @@ section_slug <- "abundance" # Section label
 section_title <- "Abundance" # Figure title
 section_short <- "Abundance" # TOC and page header
 keyword <- "Abundance"
-g <- ckan_res("")
+g <- ckan_res("781ffeb6-d704-44e2-8dc6-51eba39bf8fb")
 @
 \sh{\Sexpr{report_slug}}{\Sexpr{chapter_slug}}{\Sexpr{section_slug}}{\Sexpr{section_short}}{\Sexpr{section_title}}{\Sexpr{keyword}}
 \mpa{\Sexpr{g$url}}{\Sexpr{g$ind}}{\Sexpr{g$pth}}{\Sexpr{g$cap}}{\Sexpr{g$src}}{\Sexpr{g$ori}}{\Sexpr{g$lub}}{\Sexpr{g$luo}}{\Sexpr{g$syn}}
+
+This subsection is produced by two macros, \texttt{\textbackslash sh} and \texttt{\textbackslash mpa}.
+The first macro generates the subsection heading--hence its mnemonic name "sh"--,
+sets the page header and table of contents link, generates an internal label for
+cross-references, and injects a keyword into the index.
+
+The second macro generates the figure - its idiosyncratic name "mpa" is a legacy
+from  the real-life use case it was initially created for.
+It first downloads the CKAN resource to a local file, breaking up the url path
+into a corresponding local file path.
 
 
 %-------------------------------------------------------------------------------
