@@ -1,0 +1,194 @@
+This chapter is targetted towards authors and contains technical details required to contribute content.
+Authors receive an introduction and setup of their report writing environment.
+To subsequently contribute content, a basic understanding of the gritty innards
+of the reports is highly desirable for the authors.
+
+The content of the reports lives in two main locations:
+The data catalog holds data sets, figures, captions, and metadata around figures,
+while the reports hold summary, assessment, figure titles, synopsis, management
+implications, and references (which are moved to a separate chapter by the editors).
+
+\section*{To R is human, to Sweave - divine}
+Chapters are \href{http://www.stat.uni-muenchen.de/~leisch/Sweave/}{Sweave} documents,
+capable of running R code embedded in the \LaTeX\ markup.
+Document content is split up over separate files at the chapter level for easier handling.
+
+Across the Sweave documents, chunks of R code are used in three ways:
+\begin{itemize}
+\item To define internal variables, separating the document structure
+	(defined in \LaTeX) from document content (defined as R variables),
+\item to run custom-made R functions, e.g. to use R to retrieve content from online
+	sources, such as the data catalog, and
+\item to run arbitrary R code for real-time processing and analysis of data.
+\end{itemize}
+
+\subsection*{Defining internal variables with R}
+While the text content of report, chapter and section headings will differ,
+they share the exact same structure. To separate out structure from content, the
+structure is defined in \LaTeX\ markup, while the content is defined
+in R chunks, and shared with the \LaTeX\ side through R variables.
+
+\section*{Chapter Structure}
+Each chapter consists of the same sections: Summary, Assessment, Figures
+(under the subheadings of Condition, Pressure, and Response Indicators),
+a general Synopsis, Management Implications with several subheadings,
+and References.
+
+\subsection*{Chapter heading}
+In the chapter heading, adjust the variables to reflect authorship and your input.
+{\small\begin{verbatim}
+chapter\_slug $<-$ "dugong"
+chapter\_title $<-$ "Dugong"
+author $<-$ "Kevin Bancroft"
+contributors $<-$ "Kim Friedman, Andrew Halford"
+written $<-$ "August 2014"
+revised $<-$ ""
+# Kim Friedman 2015-08-04 done
+i <- ckan_res("6809b734-366d-4a4a-86b5-15d77ad87a28")
+\end{verbatim}}
+
+Adjust the variables as needed (mainly author, contributors, written):
+\begin{itemize}
+\item{chapter\_slug} A short, url-safe label for the chapter for internal cross-reference.
+This will only ever ben used internally, and never be seen in the final PDF.
+\item{chapter\_title} The chapter title as displayed in the final PDF.
+\item{author} The chapter author (asset leader) as displayed in the final PDF.
+\item{contributors} Contributors of data, figures, and/or text as displayed in the
+final PDF.
+\item{written} The date on which the whole chapter was submitted for editorial review.
+Setting this date signals that all author and contributor input has been provided.
+\item{revised} Once the chapter has been revised, the date will be set to indicate
+that the content of this chapter is finalised, and the chapter is ready for final
+editing touches.
+\item{comment} Individual authors are encouraged to leave comments about their contribution status.
+The example shows a comment by someone called Kim Friedman indicating that his
+contributions have been completed.
+\item{i} Insert the resource ID of the title image here.
+\item{macro \textbackslash ch} This macro generates the chapter heading from the
+variables given above.
+\end{itemize}
+
+\subsection*{Summary}
+Under the macro \texttt{\textbackslash su}, which generates the heading "Summary",
+authors are to write a general Summary of the asset's status.
+
+\subsection*{Overall Assessment}
+Authors only have to set the arguments 4 to 8 of the assessment macro to represent
+condition and pressure assessment and confidence, as well as data warning as
+explained in the help text.
+
+From 2016, in each new reporting cycle, the last line (containing \texttt{mpa\_period})
+has to be copied, the \texttt{mpa\_period} has to be replaced with the last period
+(e.g. 2015-2016), and the arguments 4 to 8 have to be adjusted to reflect the current
+assessment.
+
+{\small\begin{verbatim}
+%------------------------------------------------------------------------------
+% CPR Assessment
+% \cpr{+}{0}{-}{+}{-}{+}
+% Positive = desirable, Negative = undesirable
+% mpa_name: The park name
+% chapter_title: The asset name
+% mpa_period: The FY of this assessment
+% Argument 4: Condition Assessment: ++ + 0 - --
+% Argument 5: Condition Confidence: + 0 -
+% Argument 6: Pressure Assessment: + 0 -
+% Argument 7: Pressure Confidence: + 0 -
+% Argument 8: Data ok / warning: + -
+\asspre
+\assrow{\Sexpr{mpa_name}}{\Sexpr{chapter_title}}{2013--2014}{+}{0}{+}{0}{+}
+\assrow{\Sexpr{mpa_name}}{\Sexpr{chapter_title}}{\Sexpr{mpa_period}}{+}{0}{+}{0}{+}
+\asspost
+\end{verbatim}}
+
+\subsection*{Figures}
+Underneath the macros for Condition (\texttt{\textbackslash co}),
+Pressure (\texttt{\textbackslash pr}), and Response (\texttt{\textbackslash re})
+indicators, repeating R chunks represent individual figures:
+
+{\small\begin{verbatim}
+%------------------------------------------------------------------------------
+% INDICATOR Habitat
+<<echo=FALSE>>=
+section_slug <- "habitat" # Section label
+section_title <- "Habitat" # Full section heading
+section_short <- "Habitat" # TOC and page header
+keyword <- "Habitat"
+g <- ckan_res("ccc68eb7-8105-4cc8-8112-57bf1558e82f")
+@
+\sh{\Sexpr{report_slug}}{\Sexpr{chapter_slug}}...
+\mpa{\Sexpr{g$url}}{\Sexpr{g$ind}}{\Sexpr{g$pth}}...
+\end{verbatim}}
+
+To remove a figure, the section heading (\texttt{\textbackslash sh}) and the
+figure (\texttt{\textbackslash mpa}) macros can be commented out.
+This retains the code for later use or re-use, while hiding it from the PDF output.
+Commenting out the variable \texttt{g} prevents loading of an unused resource and
+shaves off two seconds of compiling the PDF.
+
+To add a figure, the whole block can be copied, and values in the R chunk adjusted:
+
+\begin{itemize}
+  \item{section\_slug} The slug must be url-safe and should be unique within the chapter.
+  It is used internally to create cross-references, but will never be seen in the
+  PDF output.
+  \item{section\_title} The section heading serves as figure title. It should be
+  comprehensive, yet avoid unneccessary verbosity.
+  \item{section\_short} The short version of the section title will be used in
+  page headers and the table of contents. It should honour their length limits.
+  \item{keyword} The keyword(s) will be listed in the Index at the end of the
+  PDF document. Avoid duplicates. Captitalise words.
+  \item{g} Paste the figure's resource ID from the data catalogue CKAN into
+  \texttt{ckan\_res}.
+\end{itemize}
+
+\subsection*{Synopsis}
+Authors are to write the Synopsis for the whole asset update here.
+Where time permitted, individual synopses from previous years have been moved
+here for authors' convenience, and have to be merged and shortened.
+
+\subsection*{Management Implications}
+Authors are to write management implications underneath the appropriate subheadings.
+Where time permitted, individual managment implications from previous years,
+excluding copy-pasted phrases, have been moved underneath
+"Management Implications - General" for authors' convenience, and have to be
+shortened and distributed into the appropriate subheadings.
+
+\subsection*{References}
+At the end of each chapter, a section for references exists to paste in all cited literature.
+After author contributions have been provided, the editors merge each report's
+references into one single chapter.
+
+\subsection*{Special characters}
+To typeset the following characters, see the source code of this section.
+Some special characters (\& \% \$ \# \_ \{ \} \@) have to be backwhacked
+(prepended with a backslash) in \LaTeX. Some other special characters (\textasciitilde,
+\textasciicircum, and \textbackslash)have their own \LaTeX\ command.
+Formulas like $H^{2}O$ and $NH_{4}^{+}$ need to enclosed in dollar signs.
+More \href{http://en.wikibooks.org/wiki/LaTeX/Mathematics}{here}.
+
+\subsection*{Performance}
+The slowest step in the authors' workflow is the compilation of the PDF.
+As authors will typically be interested in only one chapter -- the one they currently work on --
+the other chapters can be excluded temporarily by commenting out as follows:
+
+{\small\begin{verbatim}
+% \SweaveInput{assets/pinnipeds/nkmp-pinnipeds.Rnw}
+\SweaveInput{assets/finfish/nkmp-finfish.Rnw}
+\end{verbatim}}
+
+In this example, the Pinniped chapter is deactivated, while the Finfish chapter
+will be compiled, and all of its figures will be downloaded freshly from the
+data catalogue.
+
+\begin{remark}
+RStudio shortcut: CTRL-c toggles comments, e.g. to temporarily deactivate chapters.
+Keep Water Quality and Common Indicators active, as all other chapters crossreference them.
+It is not necessary to commit the changed report .Rnw files.
+\end{remark}
+
+
+\subsection*{References and useful links}
+\href{https://support.rstudio.com/hc/en-us}{RStudio knowledge base}\\
+\href{http://en.wikibooks.org/wiki/LaTeX}{The \LaTeX\ book}\\
+\href{http://tex.stackexchange.com/}{TeX Stackexchange Forum}\\

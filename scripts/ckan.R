@@ -24,14 +24,16 @@ require(scales)
 #' @import Hmisc
 #' @export
 #' @usage
-#' texify("Testing % ~ $ & _ m2 sqm mL-1 L-1 < > ≥ ≤"")
+#' texify("Testing % ~ $ & _ m2 sqm mL-1 L-1 < > ≥ ≤ °")
 texify <- function(text){
   text = gsub("%", "\\\\%", text)
   text = gsub("~", "\\\\~", text)
   #text = gsub("$", "\\\\$", text)
   text = gsub("&", "\\\\&", text)
   text = gsub("_", " ", text)
+  text = gsub("R2", "$R^2$", text)
   text = gsub("m2", "$m^2$", text)
+  text = gsub("m-2", "$m^-2$", text)
   text = gsub("sqm ", "$m^2$ ", text)
   text = gsub(" mL-1 ", " $mL^{-1}$ ", text)
   text = gsub(" L-1 ", " $L^{-1}$ ", text)
@@ -40,7 +42,9 @@ texify <- function(text){
   text = gsub("≥", "$\\\\geq$", text)
   text = gsub("≤", "$\\\\leq$", text)
   text = gsub("±", "$\\\\pm$", text)
+  text = gsub("+/-", "$\\\\pm$", text)
   text = gsub("=", "$=$", text)
+  text = gsub("°", "$\\\\textdegree$", text)
 
   # add more substitutions as required
   return(Hmisc::escapeBS(text))
@@ -65,8 +69,8 @@ get_key <- function(dict, key, texify=F){
 #'
 #' Onto a named list containing CKAN API's resource_show() response result,
 #' various useful bits are added, such as the resource's package_show result,
-#' as well as vigorously abbreviated important bits of metadata used in the
-#' Latex macro `ckr`.
+#' as well as vigorously abbreviated important bits of metadata used in
+#' Latex macros.
 #'
 #' @param resource_id An existing CKAN resource id
 #' @param url The base url of the resource's CKAN catalogue,
@@ -95,8 +99,8 @@ ckan_res <- function(resource_id,
   r$pth <- strsplit(r$url, "//")[[1]][2]
   r$cap <- texify(r$description)
   r$ori <- paste(url, "dataset", d$id, sep="/")
-  r$src <- texify(d$citation) #get_key(d, "citation", texify=T)
-  r$luo <- d$last_updated_on #get_key(d, "last_updated_on")
+  r$src <- get_key(d, "citation", texify=T)
+  r$luo <- get_key(d, "last_updated_on")
   r$lub <- d$maintainer
   r
 }
@@ -117,7 +121,7 @@ load_csv <- function(url,
                                        'year', 'Year'),
                      date_formats = c('YmdHMSz', 'YmdHMS','Ymd','dmY', 'Y'),
                      timezone = 'Australia/Perth'){
-  df <-read.table(url, sep = ',', header = T, stringsAsFactors = T)
+  df <-read.csv(url, as.is = F)
   cn <- names(df)
   df[cn %in% date_colnames] <- lapply(
     df[cn %in% date_colnames],

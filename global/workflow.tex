@@ -1,0 +1,87 @@
+This chapter gives an overview of the authors' work flow.
+
+\subsection*{Overview}
+
+\begin{itemize}
+	\item[Set-up]
+		One-off report automation environment set-up: Bitbucket, RStudio,
+		Data Catalog, Slack chat
+	\item[Git pull]
+		Open \href{https://rstudio.dpaw.wa.gov.au/}{RStudio} and "Git pull" to
+		get the latest revision of the source
+	\item[Compile PDF]
+		Open a report from \texttt{reports/NUMBER\_PARK.Rnw} and Compile PDF
+	\item[Edit source]
+		Ctrl-click a section in the PDF you wish to open the source file in RStudio.
+		See next chapter for detailed instructions.
+	\item[Review changes]
+		Compile the report to PDF again (not the chapter) to review changes and
+		fix errors if necessary.
+	\item[Commit and push]
+		When you have finished a chapter and the report compiles fine,
+		stage-commit-pull-push your local changes to the source code into the
+		central "master" repository.
+\end{itemize}
+
+\subsection*{Set-up: Bitbucket}
+Authors must have a free \href{https://bitbucket.org/}{Bitbucket} account, and
+the report maintainer must add these bitbucket accounts with "write" permissions to
+the \href{https://bitbucket.org/dpaw/mpa-reporting/}{Bitbucket repository}.
+
+\subsection*{Setup: RStudio Server}
+Authors of this report use RStudio Server, running on \\
+\texttt{kens-xenmate-dev.corporateict.domain}.
+Authors need to open a Remote Desktop Connection into this server (with their
+Departmental account) in order to have a local account and a home directory
+created. RStudio Server accepts Departmental logins, but requires a home
+directory to already exist.
+
+Authors need to configure their \href{https://rstudio.dpaw.wa.gov.au/}{RStudio Server}
+as follows under Tools/Global Options:
+
+\begin{itemize}
+	\item[Sweave] Enable shell escape commands, insert numbered sections and subsections
+	\item[Git/SVN] Create RSA key... (Create without passphrase), then "View public key" and copy key.
+\end{itemize}
+
+In \href{https://bitbucket.org/}{Bitbucket}: top tight > Manage account > SSHkeys >
+Add key > paste key and name it \texttt{yourusername@kens-xenmate-dev}.
+
+In Tools/Shell, user name and email are set as:
+\begin{verbatim}
+\$ git config --global user.name "John Doe"
+\$ git config --global user.email johndoe\@example.com
+\end{verbatim}
+
+In File > New Project > Version Control > Git > clone URL: \\
+\texttt{git@bitbucket.org:dpaw/mpa-reporting.git},
+create as subdirectory of (create if not existing) ~/projects.
+
+Run the script \texttt{scripts/installation.R} to download required R packages.
+
+Test the installation by compiling one report.Rnw - a PDF of the report should open.
+
+\subsection*{Version control: Git}
+This report is compiled from source documents within a folder structure.
+The source is under version control, with one "master" repository living on
+\href{https://bitbucket.org/dpaw/mpa-reporting/}{Bitbucket} and full copies of
+the complete source on each author's machine.
+
+\subsubsection*{Git pull}
+Git pull receives the latest revisions from the master repository (the sum of all other authors'
+contributions since your last update). If no new revisions are available, git pull will exit
+with a "already up to date" message.
+
+\subsubsection*{Git stage and commit}
+If a file is changed, it has to be staged (marked for addition by ticking the check box in
+RStudio's Git facet) and committed (added) to a new revision, which acts like a local restore point.
+
+\subsubsection*{Git push}
+Git push uploads all new local revisions to the master repository. The master repository must
+not have any newer revisions than the local repository - otherwise, a git push will fail
+harmlessly with an error message.
+
+Hence, local changes are typically staged, committed, then eventual remote revisions are pulled,
+before a final push sends the local revisions to the master.
+
+The following chapter will explain the technical details of writing this report.

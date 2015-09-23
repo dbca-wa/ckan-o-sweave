@@ -123,7 +123,7 @@ With these prerequisites:
 * Fork this repo into your own GitHub account and copy the clone URL.
 * In RStudio, create new project from version control, paste your fork's clone URL.
 * One-off, run `scripts/installation.R` to download and install required R packages.
-* Open `reports/report01.Rnw`, hit "Compile PDF" to compile the template PDF.
+* Open `report01.Rnw`, hit "Compile PDF" to compile the template PDF.
 
 Read the PDF and the source code for an explanation of the basic structure and 
 instructions on how to extend this template into your report.

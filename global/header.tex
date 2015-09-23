@@ -1,0 +1,890 @@
+%------------------------------------------------------------------------------
+% Legrand's Orange Book header
+%------------------------------------------------------------------------------
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% The Legrand Orange Book
+% LaTeX Template
+% Version 1.4 (12/4/14)
+%
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% Original author: Mathias Legrand (legrand.mathias@gmail.com)
+% Adapted by: Florian Mayer (Florian.Mayer@dpaw.wa.gov.au)
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%
+% Compiling this template (Legrand's version)
+% This template uses biber for its bibliography and makeindex for its index.
+% When you first open the template, compile it from the command line with the
+% commands below to make sure your LaTeX distribution is configured correctly:
+%
+% 1) pdflatex main
+% 2) makeindex main.idx -s global/StyleInd.ist
+% 3) biber main
+% 4) pdflatex main x 2
+%
+% After this, when you wish to update the bibliography/index use the appropriate
+% command above and make sure to compile with pdflatex several times
+% afterwards to propagate your changes to the document.
+%
+% This template also uses a number of packages which may need to be
+% updated to the newest versions for the template to compile. It is strongly
+% recommended you update your LaTeX distribution if you have any
+% compilation errors.
+%
+% Important note:
+% Chapter heading images should have a 2:1 width:height ratio,
+% e.g. 920px width and 460px height.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%  PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[11pt,fleqn]{book} % Default font size and left-justified equations
+
+% Page margins
+\usepackage[top=3cm,bottom=3cm,left=3.2cm,right=3.2cm,headsep=10pt,a4paper]{geometry}
+
+% Required for specifying colors by name
+\usepackage[usenames,dvipsnames,svgnames,table]{xcolor}
+
+% Define the orange color used for highlighting throughout the book
+\definecolor{ocre}{RGB}{243,102,25}
+
+% Font Settings
+\usepackage{avant} % Use the Avantgarde font for headings
+%\usepackage{times} % Use the Times font for headings
+\renewcommand{\familydefault}{\sfdefault} % sans serif font as default
+
+% Use the Adobe Times Roman as the default text font together with math symbols
+% from the Symbol, Chancery and Computer Modern fonts
+\usepackage{mathptmx}
+
+\usepackage{microtype} % Slightly tweak font spacing for aesthetics
+\usepackage[utf8]{inputenc} % Required for including letters with accents
+% \DeclareUnicodeCharacter{B0}{\textdegree}
+% \DeclareUnicodeCharacter{00A0}{ }
+\usepackage[T1]{fontenc} % Use 8-bit encoding that has 256 glyphs
+
+% Bibliography
+\usepackage[
+  style=alphabetic,
+  sorting=nyt,
+  sortcites=true,
+  autopunct=true,
+  autolang=hyphen,
+  hyperref=true,
+  abbreviate=false,
+  backref=true,
+  backend=biber]{biblatex}
+\addbibresource{global/bibliography.bib} % BibTeX bibliography file
+\defbibheading{bibempty}{}
+
+% Index
+\usepackage{calc} % used for spacing the index letter headings correctly
+\usepackage{makeidx} % Required to make an index
+\makeindex % Tells LaTeX to create the files required for indexing
+%----------------------------------------------------------------------------------------
+%  VARIOUS REQUIRED PACKAGES
+%----------------------------------------------------------------------------------------
+
+\usepackage{titlesec} % Allows customization of titles
+
+\usepackage{graphicx} % Required for including pictures
+
+% CKAN-o-Sweave: do not use, as it collides with path of images downloaded from CKAN
+%\graphicspath{{img/}} % Specifies the directory where pictures are stored
+
+\usepackage{lipsum} % Inserts dummy text
+
+\usepackage{tikz} % Required for drawing custom shapes
+
+\usepackage[english]{babel} % English language/hyphenation
+
+\usepackage{enumitem} % Customize lists
+\setlist{nolistsep} % Reduce spacing between bullet points and numbered lists
+
+\usepackage{booktabs} % Required for nicer horizontal rules in tables
+
+\usepackage{eso-pic} % Required for specifying an image background in the title page
+
+\usepackage{xstring} % Conditionals
+%----------------------------------------------------------------------------------------
+%	MAIN TABLE OF CONTENTS
+%----------------------------------------------------------------------------------------
+
+\usepackage{titletoc} % Required for manipulating the table of contents
+\setcounter{tocdepth}{4}
+\contentsmargin{0cm} % Removes the default margin
+% Chapter text styling
+\titlecontents{chapter}[1.25cm] % Indentation
+{\addvspace{15pt}\large\sffamily\bfseries} % Spacing and font options for chapters
+{\color{ocre!60}\contentslabel[\Large\thecontentslabel]{1.25cm}\color{ocre}} % Chapter number
+{}
+{\color{ocre!60}\normalsize\sffamily\bfseries\;\titlerule*[.5pc]{.}\;\thecontentspage} % Page number
+% Section text styling
+\titlecontents{section}[1.25cm] % Indentation
+{\addvspace{5pt}\sffamily\bfseries} % Spacing and font options for sections
+{\contentslabel[\thecontentslabel]{1.25cm}} % Section number
+{}
+{\sffamily\hfill\color{black}\thecontentspage} % Page number
+[]
+% Subsection text styling
+\titlecontents{subsection}[1.25cm] % Indentation
+{\addvspace{1pt}\sffamily\small} % Spacing and font options for subsections
+{\contentslabel[\thecontentslabel]{1.25cm}} % Subsection number
+{}
+{\sffamily\;\titlerule*[.5pc]{.}\;\thecontentspage} % Page number
+[]
+
+%----------------------------------------------------------------------------------------
+%	MINI TABLE OF CONTENTS IN CHAPTER HEADS
+%----------------------------------------------------------------------------------------
+
+% Section text styling
+\setcounter{tocdepth}{3}
+\titlecontents{lsection}[0em] % Indendating
+{\footnotesize\sffamily} % Font settings
+{}
+{}
+{}
+
+% Subsection text styling
+\titlecontents{lsubsection}[.5em] % Indentation
+{\normalfont\footnotesize\sffamily} % Font settings
+{}
+{}
+{}
+
+%----------------------------------------------------------------------------------------
+%	PAGE HEADERS
+%----------------------------------------------------------------------------------------
+
+\usepackage{fancyhdr} % Required for header and footer configuration
+
+\pagestyle{fancy}
+\renewcommand{\chaptermark}[1]{\markboth{\sffamily\normalsize\bfseries\chaptername\ \thechapter.\ #1}{}} % Chapter text font settings
+\renewcommand{\sectionmark}[1]{\markright{\sffamily\normalsize\thesection\hspace{5pt}#1}{}} % Section text font settings
+\fancyhf{} \fancyhead[LE,RO]{\sffamily\normalsize\thepage} % Font setting for the page number in the header
+\fancyhead[LO]{\rightmark} % Print the nearest section name on the left side of odd pages
+\fancyhead[RE]{\leftmark} % Print the current chapter name on the right side of even pages
+\renewcommand{\headrulewidth}{0.5pt} % Width of the rule under the header
+\addtolength{\headheight}{2.5pt} % Increase the spacing around the header slightly
+\renewcommand{\footrulewidth}{0pt} % Removes the rule in the footer
+\fancypagestyle{plain}{\fancyhead{}\renewcommand{\headrulewidth}{0pt}} % Style for when a plain pagestyle is specified
+
+% Removes the header from odd empty pages at the end of chapters
+\makeatletter
+\renewcommand{\cleardoublepage}{
+\clearpage\ifodd\c@page\else
+\hbox{}
+\vspace*{\fill}
+\thispagestyle{empty}
+\newpage
+\fi}
+
+%----------------------------------------------------------------------------------------
+%	THEOREM STYLES
+%----------------------------------------------------------------------------------------
+
+\usepackage{amsmath,amsfonts,amssymb,amsthm} % For math equations, theorems, symbols, etc
+
+\newcommand{\intoo}[2]{\mathopen{]}#1\,;#2\mathclose{[}}
+\newcommand{\ud}{\mathop{\mathrm{{}d}}\mathopen{}}
+\newcommand{\intff}[2]{\mathopen{[}#1\,;#2\mathclose{]}}
+\newtheorem{notation}{Notation}[chapter]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%% dedicated to boxed/framed environements %%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newtheoremstyle{ocrenumbox}% % Theorem style name
+{0pt}% Space above
+{0pt}% Space below
+{\normalfont}% % Body font
+{}% Indent amount
+{\small\bf\sffamily\color{ocre}}% % Theorem head font
+{\;}% Punctuation after theorem head
+{0.25em}% Space after theorem head
+{\small\sffamily\color{ocre}\thmname{#1}\nobreakspace\thmnumber{\@ifnotempty{#1}{}\@upn{#2}}% Theorem text (e.g. Theorem 2.1)
+\thmnote{\nobreakspace\the\thm@notefont\sffamily\bfseries\color{black}---\nobreakspace#3.}} % Optional theorem note
+\renewcommand{\qedsymbol}{$\blacksquare$}% Optional qed square
+
+\newtheoremstyle{blacknumex}% Theorem style name
+{5pt}% Space above
+{5pt}% Space below
+{\normalfont}% Body font
+{} % Indent amount
+{\small\bf\sffamily}% Theorem head font
+{\;}% Punctuation after theorem head
+{0.25em}% Space after theorem head
+{\small\sffamily{\tiny\ensuremath{\blacksquare}}\nobreakspace\thmname{#1}\nobreakspace\thmnumber{\@ifnotempty{#1}{}\@upn{#2}}% Theorem text (e.g. Theorem 2.1)
+\thmnote{\nobreakspace\the\thm@notefont\sffamily\bfseries---\nobreakspace#3.}}% Optional theorem note
+
+\newtheoremstyle{blacknumbox} % Theorem style name
+{0pt}% Space above
+{0pt}% Space below
+{\normalfont}% Body font
+{}% Indent amount
+{\small\bf\sffamily}% Theorem head font
+{\;}% Punctuation after theorem head
+{0.25em}% Space after theorem head
+{\small\sffamily\thmname{#1}\nobreakspace\thmnumber{\@ifnotempty{#1}{}\@upn{#2}}% Theorem text (e.g. Theorem 2.1)
+\thmnote{\nobreakspace\the\thm@notefont\sffamily\bfseries---\nobreakspace#3.}}% Optional theorem note
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%% dedicated to non-boxed/non-framed environements %%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newtheoremstyle{ocrenum}% % Theorem style name
+{5pt}% Space above
+{5pt}% Space below
+{\normalfont}% % Body font
+{}% Indent amount
+{\small\bf\sffamily\color{ocre}}% % Theorem head font
+{\;}% Punctuation after theorem head
+{0.25em}% Space after theorem head
+{\small\sffamily\color{ocre}\thmname{#1}\nobreakspace\thmnumber{\@ifnotempty{#1}{}\@upn{#2}}% Theorem text (e.g. Theorem 2.1)
+\thmnote{\nobreakspace\the\thm@notefont\sffamily\bfseries\color{black}---\nobreakspace#3.}} % Optional theorem note
+\renewcommand{\qedsymbol}{$\blacksquare$}% Optional qed square
+\makeatother
+
+% Defines the theorem text style for each type of theorem to one of the three styles above
+\newcounter{dummy}
+\numberwithin{dummy}{section}
+\theoremstyle{ocrenumbox}
+\newtheorem{theoremeT}[dummy]{Theorem}
+\newtheorem{problem}{Problem}[chapter]
+\newtheorem{exerciseT}{Exercise}[chapter]
+\theoremstyle{blacknumex}
+\newtheorem{exampleT}{Example}[chapter]
+\theoremstyle{blacknumbox}
+\newtheorem{vocabulary}{Vocabulary}[chapter]
+\newtheorem{definitionT}{Definition}[section]
+\newtheorem{corollaryT}[dummy]{Corollary}
+\theoremstyle{ocrenum}
+\newtheorem{proposition}[dummy]{Proposition}
+
+%----------------------------------------------------------------------------------------
+%	DEFINITION OF COLORED BOXES
+%----------------------------------------------------------------------------------------
+
+\RequirePackage[framemethod=default]{mdframed} % Required for creating the theorem, definition, exercise and corollary boxes
+
+% Theorem box
+\newmdenv[skipabove=7pt,
+skipbelow=7pt,
+backgroundcolor=black!5,
+linecolor=ocre,
+innerleftmargin=5pt,
+innerrightmargin=5pt,
+innertopmargin=5pt,
+leftmargin=0cm,
+rightmargin=0cm,
+innerbottommargin=5pt]{tBox}
+
+% Exercise box
+\newmdenv[skipabove=7pt,
+skipbelow=7pt,
+rightline=false,
+leftline=true,
+topline=false,
+bottomline=false,
+backgroundcolor=ocre!10,
+linecolor=ocre,
+innerleftmargin=5pt,
+innerrightmargin=5pt,
+innertopmargin=5pt,
+innerbottommargin=5pt,
+leftmargin=0cm,
+rightmargin=0cm,
+linewidth=4pt]{eBox}
+
+% Definition box
+\newmdenv[skipabove=7pt,
+skipbelow=7pt,
+rightline=false,
+leftline=true,
+topline=false,
+bottomline=false,
+linecolor=ocre,
+innerleftmargin=5pt,
+innerrightmargin=5pt,
+innertopmargin=0pt,
+leftmargin=0cm,
+rightmargin=0cm,
+linewidth=4pt,
+innerbottommargin=0pt]{dBox}
+
+% Corollary box
+\newmdenv[skipabove=7pt,
+skipbelow=7pt,
+rightline=false,
+leftline=true,
+topline=false,
+bottomline=false,
+linecolor=gray,
+backgroundcolor=black!5,
+innerleftmargin=5pt,
+innerrightmargin=5pt,
+innertopmargin=5pt,
+leftmargin=0cm,
+rightmargin=0cm,
+linewidth=4pt,
+innerbottommargin=5pt]{cBox}
+
+% Creates an environment for each type of theorem and assigns it a theorem text style from the "Theorem Styles" section above and a colored box from above
+\newenvironment{theorem}{\begin{tBox}\begin{theoremeT}}{\end{theoremeT}\end{tBox}}
+\newenvironment{exercise}{\begin{eBox}\begin{exerciseT}}{\hfill{\color{ocre}\tiny\ensuremath{\blacksquare}}\end{exerciseT}\end{eBox}}
+\newenvironment{definition}{\begin{dBox}\begin{definitionT}}{\end{definitionT}\end{dBox}}
+\newenvironment{example}{\begin{exampleT}}{\hfill{\tiny\ensuremath{\blacksquare}}\end{exampleT}}
+\newenvironment{corollary}{\begin{cBox}\begin{corollaryT}}{\end{corollaryT}\end{cBox}}
+
+%----------------------------------------------------------------------------------------
+%	REMARK ENVIRONMENT
+%----------------------------------------------------------------------------------------
+
+\newenvironment{remark}{\par\vspace{10pt}\small % Vertical white space above the remark and smaller font size
+\begin{list}{}{
+\leftmargin=35pt % Indentation on the left
+\rightmargin=25pt}\item\ignorespaces % Indentation on the right
+\makebox[-2.5pt]{\begin{tikzpicture}[overlay]
+\node[
+draw=ocre!60,
+line width=1pt,
+circle,
+fill=ocre!25,
+font=\sffamily\bfseries,
+inner sep=2pt,
+outer sep=0pt] at (-15pt,0pt){\textcolor{ocre}{R}};\end{tikzpicture}} % Orange R in a circle
+\advance\baselineskip -1pt}{\end{list}\vskip5pt} % Tighter line spacing and white space after remark
+
+%----------------------------------------------------------------------------------------
+%	SECTION NUMBERING IN THE MARGIN
+%----------------------------------------------------------------------------------------
+
+\makeatletter
+\renewcommand{\@seccntformat}[1]{\llap{\textcolor{ocre}{\csname the#1\endcsname}\hspace{1em}}}
+\renewcommand{\section}{\@startsection{section}{1}{\z@}
+{-4ex \@plus -1ex \@minus -.4ex}
+{1ex \@plus.2ex }
+{\normalfont\large\sffamily\bfseries}}
+\renewcommand{\subsection}{\@startsection {subsection}{2}{\z@}
+{-3ex \@plus -0.1ex \@minus -.4ex}
+{0.5ex \@plus.2ex }
+{\normalfont\sffamily\bfseries}}
+\renewcommand{\subsubsection}{\@startsection {subsubsection}{3}{\z@}
+{-2ex \@plus -0.1ex \@minus -.2ex}
+{.2ex \@plus.2ex }
+{\normalfont\small\sffamily\bfseries}}
+\renewcommand\paragraph{\@startsection{paragraph}{4}{\z@}
+{-2ex \@plus-.2ex \@minus .2ex}
+{.1ex}
+{\normalfont\small\sffamily\bfseries}}
+
+%------------------------------------------------------------------------------
+% Hyperlinks
+%------------------------------------------------------------------------------
+\usepackage{nameref}
+\usepackage{ifxetex,ifluatex}
+\ifxetex
+  \usepackage[setpagesize=false, % page size defined by xetex
+              unicode=false, % unicode breaks when used with xetex
+              xetex]{hyperref}
+\else
+  \usepackage[unicode=true]{hyperref}
+\fi
+\hypersetup{
+%   backref=true,
+%   pagebackref=true,
+%   hyperindex=true,
+  breaklinks=true,
+  urlcolor= ocre,
+%   bookmarks=true,
+  bookmarksopen=false,
+  pdfauthor={Marine Science Program, Dept Parks and Wildlife, WA},
+  pdftitle={Annual Marine Protected Area Biodiversity Assets and Social Values Report},
+  colorlinks=true,
+  linkcolor=ocre,
+  pdfborder={0 0 0}}
+
+\urlstyle{same}  % don't use monospace font for urlstyle
+
+%----------------------------------------------------------------------------------------
+%  Page flow control
+%----------------------------------------------------------------------------------------
+\widowpenalty=10000
+\clubpenalty=10000
+\vbadness=1200
+\hbadness=11000
+
+%----------------------------------------------------------------------------------------
+%	CHAPTER HEADINGS
+%----------------------------------------------------------------------------------------
+
+% The set-up below should be (sadly) manually adapted to the overall margin page septup
+% controlled by the geometry package loaded in the main.tex document. It is possible to
+% implement below the dimensions used in the goemetry package (top,bottom,left,right)... TO BE DONE
+
+\newcommand{\thechapterimage}{}
+\newcommand{\chapterimage}[1]{\renewcommand{\thechapterimage}{#1}}
+
+% Numbered chapters with mini tableofcontents
+\def\thechapter{\arabic{chapter}}
+\def\@makechapterhead#1{
+\thispagestyle{empty}
+{\centering \normalfont\sffamily
+\ifnum \c@secnumdepth >\m@ne
+\if@mainmatter
+\startcontents
+\begin{tikzpicture}[remember picture,overlay]
+\node at (current page.north west)
+{\begin{tikzpicture}[remember picture,overlay]
+\node[anchor=north west,inner sep=0pt] at (0,0) {
+\includegraphics[width=\paperwidth,height=0.5\paperwidth]{\thechapterimage}};
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Commenting the 3 macros below removes the small contents box in the chapter heading
+
+% Mini TOC background box
+\fill[color=ocre!10!white,opacity=.2] (1cm,0) rectangle (
+  3.5cm, % Mini TOC box width
+  -3.5cm % Mini TOC box height
+);
+
+% Mini TOC text content
+\node[anchor=north west] at (1.1cm,.35cm) {
+  \parbox[t][8cm][t]{6.5cm}{
+    \huge\bfseries\flushleft
+    \printcontents{l}{1}{
+    \setcounter{tocdepth}{1} % Mini TOC level depth
+    }
+  }
+};
+
+% Chapter heading
+\draw[anchor=west] (5cm,-9cm) node [
+rounded corners=20pt,
+fill=ocre!10!white,
+text opacity=1,
+draw=ocre,
+draw opacity=1,
+line width=1.5pt,
+fill opacity=.2,
+inner sep=12pt]{
+  \huge\sffamily\bfseries\textcolor{black}{
+    \thechapter. #1\strut\makebox[22cm]{}
+  }
+};
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end{tikzpicture}};
+\end{tikzpicture}}
+\par\vspace*{210\p@} % was 230
+\fi
+\fi}
+
+% Unnumbered chapters without mini tableofcontents (could be added though)
+\def\@makeschapterhead#1{
+\thispagestyle{empty}
+{\centering \normalfont\sffamily
+\ifnum \c@secnumdepth >\m@ne
+\if@mainmatter
+\begin{tikzpicture}[remember picture,overlay]
+\node at (current page.north west)
+{\begin{tikzpicture}[remember picture,overlay]
+\node[anchor=north west,inner sep=0pt] at (0,0) {
+  \includegraphics[width=\paperwidth,height=0.5\paperwidth]{\thechapterimage}};
+\draw[anchor=west] (5cm,-9cm) node [rounded corners=20pt,
+  fill=ocre!10!white,fill opacity=.6,inner sep=12pt,text opacity=1,
+  draw=ocre,draw opacity=1,line width=1.5pt]{
+  \huge\sffamily\bfseries\textcolor{black}{#1\strut\makebox[22cm]{}}};
+\end{tikzpicture}};
+\end{tikzpicture}}
+\par\vspace*{210\p@}
+\fi
+\fi
+}
+\makeatother
+%------------------------------------------------------------------------------
+% End of Legrand's orange book header
+%------------------------------------------------------------------------------
+
+%------------------------------------------------------------------------------
+% CKAN-o-Sweave specific header
+%------------------------------------------------------------------------------
+% A horizontal rule
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
+
+% lixltx2e provides \textsubscript
+\usepackage{fixltx2e}
+
+\usepackage{syntonly}
+% \syntaxonly
+
+%------------------------------------------------------------------------------
+% Graphics
+%------------------------------------------------------------------------------
+% We will generate all images so they have a width \maxwidth. This means
+% that they will get their normal width if they fit onto the page, but
+% are scaled down if they would overflow the margins.
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\makeatother
+\newcommand{\includeMPAgraphics}[1]{\includegraphics[width=0.8\linewidth]{#1}}
+% \newcommand{\includeMPAgraphics}[1]{\includegraphics[width=\maxwidth]{#1}}
+
+% Keep figures from floating to new page:
+% http://tex.stackexchange.com/questions/2275/keeping-tables-figures-close-to-where-they-are-mentioned
+% http://www.ctan.org/pkg/float
+\usepackage{float}
+\floatplacement{figure}{H}
+
+% Allow transparent images
+\usepackage{transparent}
+
+% smaller figure captions
+\usepackage[font=small,labelfont=bf]{caption}
+
+%------------------------------------------------------------------------------
+% Watermark
+% Comment the next section in/out to toggle watermark
+%------------------------------------------------------------------------------
+\usepackage[firstpage]{draftwatermark} % add watermark to first page
+\SetWatermarkText{Internal use only}
+\SetWatermarkScale{0.3}
+\SetWatermarkColor[gray]{0.85}
+%
+% %------------------------------------------------------------------------------
+% % Common headings and text chunks
+% %------------------------------------------------------------------------------
+\newcommand{\ack}[3]{
+Prepared by {#1} with input from {#2}\\
+Management implications and overall assessment current as of {#3}; data current as marked.
+}
+
+\newcommand{\su}{
+\section*{Summary}
+\addcontentsline{toc}{section}{\textcolor{ocre}{Summary}}
+}
+
+\newcommand{\ass}{
+\section*{Assessment}
+\addcontentsline{toc}{section}{\textcolor{ocre}{Assessment}}
+}
+
+\newcommand{\co}{
+\section*{Condition}
+\addcontentsline{toc}{section}{\textcolor{ocre}{Condition}}
+}
+
+\newcommand{\pr}{
+\section*{Pressure}
+\addcontentsline{toc}{section}{\textcolor{ocre}{Pressure}}
+}
+
+\newcommand{\re}{
+\section*{Response}
+\addcontentsline{toc}{section}{\textcolor{ocre}{Response}}
+}
+
+\newcommand{\sy}{
+\section*{Synopsis}
+\addcontentsline{toc}{section}{\textcolor{ocre}{Synopsis}}
+}
+
+\newcommand{\mi}{
+\section*{Management implications}
+\addcontentsline{toc}{section}{\textcolor{ocre}{Management}}
+}
+
+\newcommand{\migen}{\subsubsection*{General}}
+\newcommand{\miadm}{\subsubsection*{Management and administrative framework}}
+\newcommand{\miedu}{\subsubsection*{Education and interpretation}}
+\newcommand{\mipub}{\subsubsection*{Public participation}}
+\newcommand{\mipat}{\subsubsection*{Patrol and enforcement}}
+\newcommand{\mivis}{\subsubsection*{Management intervention and visitor infrastructure}}
+\newcommand{\mires}{\subsubsection*{Research}}
+\newcommand{\mimon}{\subsubsection*{Monitoring}}
+
+
+\newcommand{\rf}{
+\section*{References}
+\addcontentsline{toc}{section}{\textcolor{ocre}{References}}
+}
+
+\newcommand{\references}{
+\section*{References}
+\addcontentsline{toc}{section}{\textcolor{ocre}{References}}
+}
+
+\newcommand{\sd}{
+\subsubsection*{Source of data}
+}
+
+% \fg{figure caption as placeholder} creates a placeholder note
+\newcommand{\fg}[1]{
+\subsection*{Figure} {#1}
+}
+
+% \sh{report slug}{chapter slug}{section slug}{short TOC/header title}{Section heading}{Index keyword}
+%
+% creates:
+% \section[section_short]{section_title}
+% \sectionmark{section_short}
+% \label{sec:report_slug-chapter_slug-section_slug}
+% \index{index_keyword}
+%
+% To combine unnumbered subsections with short section titles, read
+% http://tex.stackexchange.com/questions/168378/unnumbered-sections-and-section-marks
+\newcommand{\sh}[6]{
+% \subsection[#4]{#5} % Numbered with short version for TOC
+\subsection*{#5} % Unnumbered without short version for TOC
+\sectionmark{#4}
+\addcontentsline{toc}{subsection}{\textcolor{ocre}#4}
+\label{sec:#1-#2-#3}
+\index{#6}
+}
+
+\newcommand{\sech}[6]{
+\section*{#5} % Unnumbered without short version for TOC
+\sectionmark{#4}
+\addcontentsline{toc}{section}{\textcolor{ocre}#4}
+\label{sec:#1-#2-#3}
+\index{#6}
+}
+
+%\ch{i$url}{i$pth}{chapter_title}{{report_slug}{chapter_slug}{author}{contributors}{written}
+\newcommand{\ch}[8]{
+\write18{wget -x #1}
+\chapterimage{#2}
+\chapter{#3}
+\label{chap:#4-#5}
+\ack{#6}{#7}{#8}
+}
+
+%------------------------------------------------------------------------------
+% CKAN integration
+%------------------------------------------------------------------------------
+% This section contains Latex macros to simplify using the output of R function
+% "ckan_res" to produce subsections with text and figures retrieved from CKAN.
+
+
+\newcommand{\mpa}[9]{
+\write18{wget -x #1 } % Download image
+% \subsection*{#2}
+\begin{figure}
+  \centering
+  \includeMPAgraphics{#3}
+  \caption{#4\\Source: #5\\\href{#6}{Data} last updated by {#7} on {#8}}
+\end{figure}
+}
+
+%------------------------------------------------------------------------------
+% CPR tables
+%------------------------------------------------------------------------------
+% This longer example demonstrates how to turn a repeating, complex Latex
+% section into a compact, easy to use macro.
+%
+% Options for Condition Assessment:
+% \cellcolor{green} EXCELLENT
+% \cellcolor{green!25} GOOD
+% \cellcolor{lightgray!25} SATISFACTORY
+% \cellcolor{yellow!50} UNSATISFACTORY
+% \cellcolor{red!50} POOR
+%
+% Options for Pressure Assessment:
+% \cellcolor{green} LOW
+% \cellcolor{lightgray!25} MODERATE
+% \cellcolor{yellow!50} HIGH
+%
+% Options for Confidence (both Condition and Pressure)
+% \cellcolor{green} HIGH
+% \cellcolor{lightgray!25} MEDIUM
+% \cellcolor{yellow!50} LOW
+%
+% Options for Pressure Trend
+% \cellcolor{green} DECREASING
+% \cellcolor{lightgray!25} CONSTANT
+% \cellcolor{yellow!50} INCREASING
+
+% CPR Table
+% \cpr{+}{0}{-}{+}{-}{+}
+% Positive = desirable, Negative = undesirable
+% Argument 1: Condition Assessment: ++ + 0 - --
+% Argument 2: Condition Confidence: + 0 -
+% Argument 3: Pressure Assessment: + 0 -
+% Argument 4: Pressure Confidence: + 0 -
+% Argument 5: Pressure Trend: + 0 -
+% Argument 6: Data ok / warning: + -
+\newcommand{\cpr}[6]{%
+  \ass
+  \begin{center}
+  \begin{tabular} {l l l} \\
+  \hline
+  CPR & Assessment & Confidence \\
+  \hline
+  Condition &
+    \IfEqCase{#1}{%
+      {++}{\cellcolor{green} EXCELLENT}%
+      {+}{\cellcolor{green!25} GOOD}%
+      {0}{\cellcolor{lightgray!25} SATISFACTORY}%
+      {-}{\cellcolor{yellow!50} UNSATISFACTORY}%
+      {--}{\cellcolor{red!50} POOR}%
+      }[\PackageError{mpa-report}{Yikes, looks like the cpr macro had a fanny wobble. The 1st argument, Condition Status, can only be ++, +, 0, -, or --}{}] &
+    \IfEqCase{#2}{%
+      {+}{\cellcolor{green} HIGH}%
+      {0}{\cellcolor{lightgray!25} MEDIUM}%
+      {-}{\cellcolor{yellow!50} LOW}%
+      }[\PackageError{mpa-report}{Invalid argument used in cpr macro. The 2nd argument, Condition Confidence, can only be +, 0, or -}{}]\\
+  Pressure &
+  \IfEqCase{#3}{%
+      {+}{\cellcolor{green} LOW}%
+      {0}{\cellcolor{lightgray!25} MODERATE}%
+      {-}{\cellcolor{yellow!50} HIGH}%
+      }[\PackageError{mpa-report}{Invalid argument used in cpr macro. The 3rd argument, Pressure Status, can only be +, 0, or -}{}] &
+  \IfEqCase{#4}{%
+      {+}{\cellcolor{green} HIGH}%
+      {0}{\cellcolor{lightgray!25} MEDIUM}%
+      {-}{\cellcolor{yellow!50} LOW}%
+      }[\PackageError{mpa-report}{Invalid argument used in cpr macro. The 4th argument, Pressure Confidence, can only be +, 0, or -}{}]\\
+  Pressure Trend &
+  \IfEqCase{#5}{%
+      {+}{\cellcolor{green} DECREASING}%
+      {0}{\cellcolor{lightgray!25} CONSTANT}%
+      {-}{\cellcolor{yellow!50} INCREASING}%
+      }[\PackageError{mpa-report}{Invalid argument used in cpr macro. The 5th argument, Pressure Trend, can only be +, 0, or -}{}] &\\
+  \hline
+  \end{tabular}
+  \end{center}
+  \IfEqCase{#6}{
+    {+}{}%
+    {-}{\paragraph{Insuffient data warning} Little or no data was used in this assessment.}%
+   }[\PackageError{mpa-report}{Incorrect argument used in cpr macro. The 6th argument, Data Warning, can only be +, or -! Notably, no 0 is allowed}{}]
+}%
+
+
+%------------------------------------------------------------------------------%
+% CPR overview page macros
+%
+\newcommand{\ovpre}{
+\begin{table}[h]
+\centering
+\caption{Condition-Pressure Summary. Confidence in assessments is expressed
+through symbols: *** High Confidence, ** Medium Confidence, * Low Confidence in
+assessment. Assessments based on little or no data are marked as "insufficient".}
+\label{cpr-summary}
+\begin{tabular}{lllll}
+\hline
+Asset & Condition & Pressure & Trend & Data \\ \hline
+}
+
+\newcommand{\ovpost}{
+\hline
+\end{tabular}
+\end{table}
+}
+
+\newcommand{\ovrow}[7]{
+{#7} &
+\IfEqCase{#1}{%
+      {++}{\cellcolor{green} Excellent}%
+      {+}{\cellcolor{green!25} Good}%
+      {0}{\cellcolor{lightgray!25} Satisfactory}%
+      {-}{\cellcolor{yellow!50} Unsatisfactory}%
+      {--}{\cellcolor{red!50} Poor}%
+      }[\PackageError{mpa-report}{Yikes, looks like the ovrow macro for #7 had a fanny wobble.
+      The 1st argument, Condition Status, can only be ++, +, 0, -, or --}{}]
+\IfEqCase{#2}{%
+      {+}{***}%
+      {0}{**}%
+      {-}{*}%
+      }[\PackageError{mpa-report}{Invalid argument used in ovrow macro for #7. The 2nd argument,
+      Condition Confidence, can only be +, 0, or -}{}] &
+\IfEqCase{#3}{%
+      {+}{\cellcolor{green} Low}%
+      {0}{\cellcolor{lightgray!25} Moderate}%
+      {-}{\cellcolor{yellow!50} High}%
+      }[\PackageError{mpa-report}{Invalid argument used in ovrow macro for #7. The 3rd argument,
+      Pressure Status, can only be +, 0, or -}{}]
+\IfEqCase{#4}{%
+      {+}{***}%
+      {0}{**}%
+      {-}{*}%
+      }[\PackageError{mpa-report}{Invalid argument used in ovrow macro for #7. The 4th argument,
+      Pressure Confidence, can only be +, 0, or -}{}] &
+\IfEqCase{#5}{%
+      {+}{\cellcolor{green} Decreasing}%
+      {0}{\cellcolor{lightgray!25} Constant}%
+      {-}{\cellcolor{yellow!50} Increasing}%
+      }[\PackageError{mpa-report}{Invalid argument used in ovrow macro for #7. The 5th argument,
+      Pressure Trend, can only be +, 0, or -}{}] &
+\IfEqCase{#6}{
+      {+}{}%
+      {-}{Insufficient}%
+      }[\PackageError{mpa-report}{Incorrect argument used in ovrow macro for #7. The 6th argument,
+      Data Warning, can only be +, or -! Notably, no 0 is allowed}{}]\\
+}
+
+
+%-------------------------------------------------------------------------------
+% Assessment (from 2015)
+%
+\newcommand{\asspre}{
+\ass
+\begin{table}[h]
+\centering
+\caption{Condition-Pressure Summary. Confidence in assessments is expressed
+through symbols: *** High Confidence, ** Medium Confidence, * Low Confidence in
+assessment. Assessments based on little or no data are marked as "insufficient".}
+\label{cpr-summary}
+\begin{tabular}{llll}
+\hline
+% Park & Asset &
+Year & Condition & Pressure & Data \\ \hline
+}
+
+\newcommand{\asspost}{
+\hline
+\end{tabular}
+\end{table}
+}
+
+\newcommand{\assrow}[8]{
+% {#1} &
+% {#2} &
+{#3} &
+\IfEqCase{#4}{%
+      {++}{\cellcolor{green} Excellent}%
+      {+}{\cellcolor{green!25} Good}%
+      {0}{\cellcolor{lightgray!25} Satisfactory}%
+      {-}{\cellcolor{yellow!50} Unsatisfactory}%
+      {--}{\cellcolor{red!50} Poor}%
+      }[\PackageError{mpa-report}{Macro assrow, #1 #2 #3: The 4th argument,
+      Condition Status, can only be ++, +, 0, -, or --}{}]
+\IfEqCase{#5}{%
+      {+}{***}%
+      {0}{**}%
+      {-}{*}%
+      }[\PackageError{mpa-report}{Macro assrow, #1 #2 #3: The 5th argument,
+      Condition Confidence, can only be +, 0, or -}{}] &
+\IfEqCase{#6}{%
+      {+}{\cellcolor{green} Low}%
+      {0}{\cellcolor{lightgray!25} Moderate}%
+      {-}{\cellcolor{yellow!50} High}%
+      }[\PackageError{mpa-report}{Macro assrow, #1 #2 #3: The 6th argument,
+      Pressure Status, can only be +, 0, or -}{}]
+\IfEqCase{#7}{%
+      {+}{***}%
+      {0}{**}%
+      {-}{*}%
+      }[\PackageError{mpa-report}{Macro assrow, #1 #2 #3: The 7th argument,
+      Pressure Confidence, can only be +, 0, or -}{}] &
+\IfEqCase{#8}{
+      {+}{}%
+      {-}{Insufficient}%
+      }[\PackageError{mpa-report}{Macro assrow, #1 #2 #3: The 8th argument,
+      Data Warning, can only be +, or -! Notably, no 0 is allowed}{}]\\
+}
+

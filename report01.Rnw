@@ -10,8 +10,8 @@
 \begin{document}
 \SweaveOpts{concordance=TRUE, echo=FALSE}
 <<echo=FALSE>>=
-source('../scripts/ckan_secret.R')
-source('../scripts/ckan.R')
+source('scripts/ckan_secret.R')
+source('scripts/ckan.R')
 mpa_name <- "The report title"
 report_slug <- "example1"
 mpa_period <- "2014-2015"

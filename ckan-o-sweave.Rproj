@@ -16,4 +16,4 @@ AutoAppendNewline: Yes
 StripTrailingWhitespace: Yes
 
 BuildType: Makefile
-MakefilePath: reports
+MakefilePath: ~/projects/datawagovau/ckan-o-sweave

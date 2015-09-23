@@ -1,3 +1,5 @@
-ckan_secret.R
+*.pyc
+ckan_secret.*
+ckan_secret.*
 indicators/**/*.pdf
-secret.py
+
