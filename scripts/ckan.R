@@ -16,8 +16,7 @@ require(scales)
 
 #' Texify a string of text
 #'
-#' Substitutes characters with special meaning in Latex
-#' with their Latex counterpart.
+#' Substitutes special characters with their Latex counterpart.
 #'
 #' @param text A string of text to be substituted.
 #' @return The input text after substitution.

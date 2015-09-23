@@ -34,5 +34,6 @@ publish:
 clean:
 	@echo Deleting temporary files...
 	rm -fv *-concordance.tex *.synctex.gz *.log *.idx *.ilg *.blg \
-	*.ind *.aux *.bcf *.bbl *.out *.toc *.ptc *.run.xml *.pyc *.tex
+	*.ind *.aux *.bcf *.bbl *.out *.toc *.ptc *.run.xml *.pyc *.tex\
+	scripts/*.pyc
 	@echo done!
