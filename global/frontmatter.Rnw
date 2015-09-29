@@ -12,8 +12,8 @@
 
 \begin{flushleft}
 \par\normalfont\sffamily\selectfont\color{white}
-\Sexpr{mpa_wammp}\\
-\Sexpr{mpa_report_title}
+\Sexpr{report_publisher}\\
+\Sexpr{report_title_header}
 \end{flushleft}
 
 \centering
@@ -22,10 +22,10 @@
 \par\normalfont\fontsize{25}{25}\sffamily\selectfont
 \HRule\\
 \Sexpr{report_title}\par % Book title
-\Sexpr{mpa_period}
+\Sexpr{report_period}
 \HRule\\
-{\normalsize Edited by \Sexpr{mpa_editor}}\par % Editor
-{\normalsize Contributors \Sexpr{mpa_contributors}}\par % Authors
+{\normalsize Edited by \Sexpr{report_editor}}\par % Editor
+{\normalsize Contributors \Sexpr{report_contributors}}\par % Authors
 \endgroup
 
 %----------------------------------------------------------------------------------------
@@ -36,17 +36,17 @@
 \thispagestyle{empty}
 
 \noindent{\textbf{\Large Suggested citation format, entire report}\\
-\Sexpr{mpa_editor_reverse} (ed.) (\Sexpr{mpa_year}) \Sexpr{report_title} \Sexpr{mpa_period}:
-\Sexpr{mpa_report_title}.
+\Sexpr{report_editor_reverse} (ed.) (\Sexpr{report_year}) \Sexpr{report_title} \Sexpr{report_year}:
+\Sexpr{report_title}.
 \Sexpr{mpa_wammp}, \Sexpr{mpa_mmu_msp}, Perth, Australia. xx p.
 (For Internal Use Only) }\par
 \vspace{1cm}
 
 \noindent{\textbf{\Large Suggested citation format, individual status report}\\
-\Sexpr{mpa_contributors_reverse} (\Sexpr{mpa_year}) The status and trends of
-coral reef communities \Sexpr{mpa_period}.
-In \Sexpr{report_title} \Sexpr{mpa_period}: \Sexpr{mpa_report_title} (ed.
-\Sexpr{mpa_editor_reverse}). \Sexpr{mpa_wammp}, \Sexpr{mpa_mmu_msp}, Perth,
+\Sexpr{report_contributors_reverse} (\Sexpr{report_year}) The status and trends of
+coral reef communities \Sexpr{report_period}.
+In \Sexpr{report_title} \Sexpr{report_period}: \Sexpr{mpa_report_title} (ed.
+\Sexpr{report_editor_reverse}). \Sexpr{mpa_wammp}, \Sexpr{mpa_mmu_msp}, Perth,
 Australia. pp.xx-xx.
 (For Internal Use Only)}\par
 \vspace{1cm}
@@ -67,8 +67,8 @@ the production process is documented
 The report template is distributed under
 \href{http://creativecommons.org/licenses/by-nc-sa/3.0/}{CC BY-NC-SA 3.0} license.
 \noindent Copyright \copyright 2014-2015 Florian Mayer for the data.wa.gov.au team\\ % Copyright notice
-% \noindent \textsc{Published by \Sexpr{mpa_mmu_msp}}\\ % Publisher
-% \noindent \textsc{book-website.com}\\ % URL
+\noindent \textsc{Published by data.wa.gov.au}
+\noindent \textsc{http://data.wa.gov.au}
 
 \begin{remark}
 For authors and contributors to this report: Please see
