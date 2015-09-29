@@ -1,10 +1,10 @@
-# The nightbare-fuel below is the Makefile for project "mpa-reports"
+# The nightbare-fuel below is the Makefile for project "ckan-o-sweave"
 # Variables
 .SUFFIXES: .Rnw .tex .pdf
 .SECONDARY: %.tex
 TEX = pdflatex -shell-escape -interaction=nonstopmode -file-line-error
-SRC = 01_NKMP 03_LCSMP 05_EMBMP 10_RSMP 20_MBIMPA 30_NMP 40_SBMP 50_JBMP \
-	60_MMP 70_SEMP 80_SIMP 85_NCMP 90_WNIMP
+# Add your report filenames (without extension .Rnw) to next line
+SRC = report01
 PDF = $(SRC:=.pdf)
 
 # Meta-rules: Rnw -> tex; tex -> pdf
@@ -17,14 +17,14 @@ PDF = $(SRC:=.pdf)
 .tex.pdf:
 	@echo Typesetting $<...
 	$(TEX) $*.tex
+	# add bibtex, rerun tex twice
+	@echo Compressing $<...
+	gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.4	-dPDFSETTINGS=/printer \
+  -dNOPAUSE -dQUIET -dBATCH -sOutputFile=$*_print.pdf $*.pdf
 	@echo    done!
-	# PDF compression not required, as all graphics vector or optimized raster
-	#gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dUseCIEColor \
-	#-dPDFSETTINGS=/printer -dNOPAUSE -dQUIET -dBATCH -sOutputFile=$*_print.pdf $*.pdf
 
 # Make targets
-#all: clean $(PDF) clean publish
-all: clean publish
+all: clean $(PDF) publish clean
 
 publish:
 	@echo Publishing PDFs to data catalog...
@@ -37,3 +37,7 @@ clean:
 	*.ind *.aux *.bcf *.bbl *.out *.toc *.ptc *.run.xml *.pyc *.tex\
 	scripts/*.pyc
 	@echo done!
+
+# Dependencies: list chapters for reports, or use wildcards
+# This will compile PDFs only for reports with recently modified chapters
+report01.pdf: $(wildcard ./chapters/*.Rnw)

@@ -4,7 +4,7 @@
 % Chapter 01
 %
 <<echo=FALSE>>=
-chapter_slug <- "ch01"
+chapter_slug <- "chapter01"
 chapter_title <- "Chapter 01"
 author <- "Florian Mayer"
 contributors <- "Author 1, Author 2, Author 3"
@@ -25,6 +25,7 @@ to future report editors using this template. This is to say, this chapter will
 make most sense to you if you intend to create a new report based on this template,
 have compiled this report yourself and compare the source code of
 \texttt{reports/parts/chapter01.Rnw} with the compiled output in the PDF.
+Testing.
 
 Primarily, this chapters displays CKAN resources as figures, and uses metadata from the
 CKAN datasets to annotate the figure and link to the points of truth of the data

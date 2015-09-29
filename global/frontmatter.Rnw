@@ -21,7 +21,7 @@
 \vspace*{9cm}
 \par\normalfont\fontsize{25}{25}\sffamily\selectfont
 \HRule\\
-\Sexpr{mpa_name}\par % Book title
+\Sexpr{report_title}\par % Book title
 \Sexpr{mpa_period}
 \HRule\\
 {\normalsize Edited by \Sexpr{mpa_editor}}\par % Editor
@@ -36,7 +36,7 @@
 \thispagestyle{empty}
 
 \noindent{\textbf{\Large Suggested citation format, entire report}\\
-\Sexpr{mpa_editor_reverse} (ed.) (\Sexpr{mpa_year}) \Sexpr{mpa_name} \Sexpr{mpa_period}:
+\Sexpr{mpa_editor_reverse} (ed.) (\Sexpr{mpa_year}) \Sexpr{report_title} \Sexpr{mpa_period}:
 \Sexpr{mpa_report_title}.
 \Sexpr{mpa_wammp}, \Sexpr{mpa_mmu_msp}, Perth, Australia. xx p.
 (For Internal Use Only) }\par
@@ -45,7 +45,7 @@
 \noindent{\textbf{\Large Suggested citation format, individual status report}\\
 \Sexpr{mpa_contributors_reverse} (\Sexpr{mpa_year}) The status and trends of
 coral reef communities \Sexpr{mpa_period}.
-In \Sexpr{mpa_name} \Sexpr{mpa_period}: \Sexpr{mpa_report_title} (ed.
+In \Sexpr{report_title} \Sexpr{mpa_period}: \Sexpr{mpa_report_title} (ed.
 \Sexpr{mpa_editor_reverse}). \Sexpr{mpa_wammp}, \Sexpr{mpa_mmu_msp}, Perth,
 Australia. pp.xx-xx.
 (For Internal Use Only)}\par
