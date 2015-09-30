@@ -22,3 +22,6 @@ catalogue.alpha.data.wa.gov.au
 *.toc
 *-concordance.tex
 *.tex
+*.synctex.gz
+*.ilg
+*.ind

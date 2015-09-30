@@ -67,7 +67,7 @@ the usage of the macro and the meaning of the possible symbols.
 % Argument 8: Data ok / warning: + -
 \asspre
 \assrow{\Sexpr{report_slug}}{\Sexpr{chapter_title}}{2013--2014}{+}{0}{+}{0}{+}
-\assrow{\Sexpr{report_slug}}{\Sexpr{chapter_title}}{\Sexpr{mpa_period}}{+}{0}{+}{0}{+}
+\assrow{\Sexpr{report_slug}}{\Sexpr{chapter_title}}{\Sexpr{report_period}}{+}{0}{+}{0}{+}
 \asspost
 
 

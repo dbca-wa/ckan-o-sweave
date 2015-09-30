@@ -672,7 +672,8 @@ Management implications and overall assessment current as of {#3}; data current 
 
 
 \newcommand{\mpa}[9]{
-\write18{wget -x #1 } % Download image
+% Download image (only if [N]ewer, [c]ontinue partial downloads):
+\write18{wget -x -N -c #1 }
 % \subsection*{#2}
 \begin{figure}
   \centering
