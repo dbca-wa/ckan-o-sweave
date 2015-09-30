@@ -35,20 +35,10 @@
 ~\vfill
 \thispagestyle{empty}
 
-\noindent{\textbf{\Large Suggested citation format, entire report}\\
+\noindent{\textbf{\Large Suggested citation format}\\
 \Sexpr{report_editor_reverse} (ed.) (\Sexpr{report_year}) \Sexpr{report_title} \Sexpr{report_year}:
 \Sexpr{report_title}.
-\Sexpr{mpa_wammp}, \Sexpr{mpa_mmu_msp}, Perth, Australia. xx p.
-(For Internal Use Only) }\par
-\vspace{1cm}
-
-\noindent{\textbf{\Large Suggested citation format, individual status report}\\
-\Sexpr{report_contributors_reverse} (\Sexpr{report_year}) The status and trends of
-coral reef communities \Sexpr{report_period}.
-In \Sexpr{report_title} \Sexpr{report_period}: \Sexpr{mpa_report_title} (ed.
-\Sexpr{report_editor_reverse}). \Sexpr{mpa_wammp}, \Sexpr{mpa_mmu_msp}, Perth,
-Australia. pp.xx-xx.
-(For Internal Use Only)}\par
+\Sexpr{report_publisher}, \Sexpr{report_publisher_address}. xx p.}\par
 \vspace{1cm}
 
 \noindent\textbf{\Large Online Resources}\\
@@ -66,9 +56,9 @@ the production process is documented
 \noindent\textbf{\Large Licence and Copyright}\\
 The report template is distributed under
 \href{http://creativecommons.org/licenses/by-nc-sa/3.0/}{CC BY-NC-SA 3.0} license.
-\noindent Copyright \copyright 2014-2015 Florian Mayer for the data.wa.gov.au team\\ % Copyright notice
-\noindent \textsc{Published by data.wa.gov.au}
-\noindent \textsc{http://data.wa.gov.au}
+% Change  your report's copyright notice
+\noindent Copyright \copyright 2014-2015 Florian Mayer for the data.wa.gov.au team\\
+\noindent \textsc{Published by \Sexpr{report_publisher}}
 
 \begin{remark}
 For authors and contributors to this report: Please see
